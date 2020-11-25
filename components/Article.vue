@@ -1,12 +1,12 @@
 <template>
     <div
             v-editable="blok"
-            class="px-6">
-        <component
-                v-for="blok in blok.body"
-                :key="blok._uid"
-                :blok="blok"
-                :is="blok.component"/>
+            class="prose my-24 mx-auto">
+        <h1>{{ blok.name }}</h1>
+        <p>{{ blok.intro }}</p>
+        <rich-text-renderer
+                :document="blok.body"
+        />
     </div>
 </template>
 

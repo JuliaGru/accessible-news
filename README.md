@@ -2,7 +2,7 @@
 
 This is example `Hello World` project built with Storyblok and Nuxt.js.
 
-> To get better understanding of this project and how it works, read our [Getting Started guide](#).
+> To get better understanding of this project and how it works, read our [Getting Started guide](https://www.storyblok.com/docs/guide/getting-started).
 
 ## Codesandbox
 
