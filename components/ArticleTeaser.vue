@@ -6,7 +6,7 @@
             {{ articleContent.name }}
         </h2>
         <p class="pb-6 leading-relaxed">
-            {{ articleContent.intro }}
+            {{ articleContent.teaser }}
         </p>
     </nuxt-link>
 </template>
@@ -28,6 +28,6 @@
 
 <style>
     .article-teaser:hover {
-        box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+        box-shadow: 0 0 15px 0 rgba(0,0,0,0.75);
     }
 </style>

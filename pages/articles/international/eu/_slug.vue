@@ -1,6 +1,6 @@
 <template>
     <section>
-        <Article :blok="story.content"/>
+        <Article :blok="story.content" :tags="story.tag_list"/>
     </section>
 </template>
 
@@ -36,7 +36,7 @@
             // Load the JSON from the API
             let version = context.query._storyblok || context.isDev ? 'draft' : 'published'
 
-            return context.app.$storyapi.get(`cdn/stories/articles/${context.params.slug}`, {
+            return context.app.$storyapi.get(`cdn/stories/articles/international/eu/${context.params.slug}`, {
                 version: version
             }).then((res) => {
                 return res.data
