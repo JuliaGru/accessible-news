@@ -34,6 +34,7 @@ export default {
   methods: {
     changeScreenReader: function (sr) {
       this.$parent.screenReader = sr;
+      localStorage.setItem('sr', sr);
     }
   }
 }

@@ -12,6 +12,7 @@ export default {
     changeScreenReader: function (sr) {
       this.$parent.screenReader = sr;
       this.$parent.firstCall = false;
+      localStorage.setItem('sr', sr);
     }
   }
 }

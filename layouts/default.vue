@@ -29,5 +29,13 @@ export default {
       firstCall: true,
     }
   },
+  beforeMount() {
+    if(localStorage.getItem('sr')) {
+      this.screenReader = localStorage.getItem('sr');
+      this.firstCall = false;
+    } else {
+      localStorage.setItem('sr', false);
+    }
+  }
 }
 </script>
