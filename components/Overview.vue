@@ -1,10 +1,10 @@
 <template>
   <section>
-    <h2 class="py-10 text-center font-bold text-4xl">Articles Overview</h2>
-    <ul class="flex py-6 mb-6">
+    <h1>Articles Overview</h1>
+    <ul class="flex flex-wrap">
       <li
         v-for="article in stories" :key="article._uid"
-        class="flex-auto px-6" style="min-width: 33%">
+        class="w-1/2 pr-6 pb-6" style="padding-left: 0; margin: 0;">
         <article-teaser
           v-if="article.content"
           :article-link="'/' + article.full_slug"

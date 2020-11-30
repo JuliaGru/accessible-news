@@ -1,11 +1,11 @@
 <template>
     <nuxt-link
             :to="articleLink"
-            class="article-teaser block py-4 px-6 border rounded border-gray-500">
-        <h2 class="pt-2 pb-4 text-2xl font-bold">
+            class="article-teaser block p-6 border rounded border-gray-500">
+        <h2 class="text-2xl font-bold pb-4" style="margin: 0">
             {{ articleContent.name }}
         </h2>
-        <p class="pb-6 leading-relaxed">
+        <p class="leading-relaxed" style="margin: 0;">
             {{ articleContent.teaser }}
         </p>
     </nuxt-link>
