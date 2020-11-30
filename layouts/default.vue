@@ -3,6 +3,7 @@
     <ScreenReader/>
     <SkipLinks :screenReader="screenReader"/>
     <Header/>
+    <Breadcrumbs :links="links"/>
     <div id="content" class="prose mx-auto px-6 py-3">
       <Nuxt/>
     </div>
@@ -14,6 +15,7 @@
 import ScreenReader from '~/components/layout/ScreenReader.vue'
 import SkipLinks from '~/components/layout/SkipLinks.vue'
 import Header from '~/components/layout/Header.vue'
+import Breadcrumbs from '~/components/layout/Breadcrumbs.vue'
 import Footer from '~/components/layout/Footer.vue'
 
 export default {
@@ -21,12 +23,14 @@ export default {
     ScreenReader,
     SkipLinks,
     Header,
+    Breadcrumbs,
     Footer
   },
   data() {
     return {
       screenReader: false,
       firstCall: true,
+      links: {},
     }
   },
   beforeMount() {
@@ -36,6 +40,10 @@ export default {
     } else {
       localStorage.setItem('sr', false);
     }
-  }
+  },
+  async fetch () {
+    let preview_token = 'AZg8k4iwgfML7XgBWjtsUQtt';
+    this.links = await this.$axios.$get(`https://api.storyblok.com/v1/cdn/links?starts_with=articles/&token=${preview_token}`)
+  },
 }
 </script>
