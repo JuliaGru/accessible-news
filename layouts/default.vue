@@ -1,19 +1,30 @@
 <template>
   <div>
-    <Header />
-    <Nuxt />
-    <Footer />
+    <ScreenReader/>
+    <SkipLinks :screenReader="screenReader"/>
+    <Header/>
+    <Nuxt/>
+    <Footer/>
   </div>
 </template>
 
 <script>
-    import Header from '~/components/Header.vue'
-    import Footer from '~/components/Footer.vue'
+import ScreenReader from '~/components/ScreenReader.vue'
+import SkipLinks from '~/components/SkipLinks.vue'
+import Header from '~/components/Header.vue'
+import Footer from '~/components/Footer.vue'
 
-    export default {
-        components: {
-            Header,
-            Footer
-        }
+export default {
+  components: {
+    ScreenReader,
+    SkipLinks,
+    Header,
+    Footer
+  },
+  data() {
+    return {
+      screenReader: false,
     }
+  },
+}
 </script>
