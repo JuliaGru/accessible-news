@@ -1,0 +1,13 @@
+.theme {
+  &-international {
+    --theme-color: #C1D9D9;
+  }
+
+  &-inland {
+    --theme-color: #D7E3E8;
+  }
+}
+
+.prose h1 {
+  color: var( --theme-color );
+}
