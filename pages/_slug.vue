@@ -4,18 +4,18 @@
       v-if="story.content.component"
       :key="story.content._uid"
       :blok="story.content"
-      :is="story.content.component"/>
+      :is="story.content.component" />
   </section>
 </template>
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      story: {content: {}}
+      story: { content: {} }
     }
   },
-  mounted() {
+  mounted () {
     // Use the input event for instant update of content
     this.$storybridge.on('input', (event) => {
       if (event.story.id === this.story.id) {
@@ -31,32 +31,23 @@ export default {
       })
     })
   },
-  async fetch(context) {
-    // Loading reference data - Articles in our case
-    if (context.store.state.articles.loaded !== '1') {
-
-      let articlesRefRes = await context.app.$storyapi.get(`cdn/stories/`, {starts_with: 'articles/', version: 'draft'})
-      context.store.commit('articles/setArticles', articlesRefRes.data.stories)
-      context.store.commit('articles/setLoaded', '1')
-    }
-  },
-  asyncData(context) {
+  asyncData (context) {
     // // This what would we do in real project
     // const version = context.query._storyblok || context.isDev ? 'draft' : 'published'
     // const fullSlug = (context.route.path == '/' || context.route.path == '') ? 'home' : context.route.path
 
     // Load the JSON from the API - loadig the home content (index page)
-    return context.app.$storyapi.get('cdn/stories/home', {
+    return context.app.$storyapi.get(`cdn/stories/${context.params.slug}`, {
       version: 'draft'
     }).then((res) => {
       return res.data
     }).catch((res) => {
       if (!res.response) {
         console.error(res)
-        context.error({statusCode: 404, message: 'Failed to receive content form api'})
+        context.error({ statusCode: 404, message: 'Failed to receive content form api' })
       } else {
         console.error(res.response.data)
-        context.error({statusCode: res.response.status, message: res.response.data})
+        context.error({ statusCode: res.response.status, message: res.response.data })
       }
     })
   }

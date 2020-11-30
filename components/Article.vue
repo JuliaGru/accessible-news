@@ -1,11 +1,14 @@
 <template>
   <div
-    v-editable="blok"
-    class="prose my-24 mx-auto" :class="tagClass">
-    <p>{{ blok.tag }}</p>
+    v-editable="blok" :class="tagClass">
+    <span class="uppercase text-gray-500">{{ blok.tag }}</span>
     <h1>{{ blok.name }}</h1>
-    <span class="mr-1">{{ blok.author }}</span>/<span class="mx-1">{{ blok.date }}</span>/<span class="mx-1">{{ blok.comments }}</span>/<span class="mx-1">{{ blok.type }}</span>/<span class="ml-1">{{ category }}</span>
-    <p>{{ blok.teaser }}</p>
+    <div><icon-user /><span class="ml-1">{{ blok.author }}</span></div>
+    <div><icon-calendar /><span class="ml-1">{{ blok.date }}</span></div>
+    <div><icon-comments /><span class="ml-1">{{ blok.comments }}</span></div>
+
+    <span class="mx-1 font-bold uppercase">{{ blok.type }}</span>/<span class="ml-1 text-sm">{{ category }}</span>
+    <p class="font-bold">{{ blok.teaser }}</p>
     <div
       :key="blok._uid"
       v-for="blok in blok.content">
@@ -16,7 +19,11 @@
 </template>
 
 <script>
+import IconUser from "@/components/icons/icon-user";
+import IconComments from "@/components/icons/icon-comments";
+import IconCalendar from "@/components/icons/icon-calendar";
 export default {
+  components: {IconCalendar, IconComments, IconUser},
   props: {
     blok: {
       type: Object,

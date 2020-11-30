@@ -8,6 +8,10 @@
   }
 }
 
+.prose {
+  max-width: 800px;
+}
+
 .prose h1 {
   color: var( --theme-color );
 }
