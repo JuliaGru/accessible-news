@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import ScreenReader from '~/components/ScreenReader.vue'
-import SkipLinks from '~/components/SkipLinks.vue'
-import Header from '~/components/Header.vue'
-import Footer from '~/components/Footer.vue'
+import ScreenReader from '~/components/layout/ScreenReader.vue'
+import SkipLinks from '~/components/layout/SkipLinks.vue'
+import Header from '~/components/layout/Header.vue'
+import Footer from '~/components/layout/Footer.vue'
 
 export default {
   components: {
