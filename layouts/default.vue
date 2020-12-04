@@ -3,7 +3,6 @@
     <ScreenReader/>
     <SkipLinks :screenReader="screenReader"/>
     <Header/>
-    <Breadcrumbs :links="links"/>
     <div id="content" class="prose mx-auto px-6 py-3">
       <Nuxt/>
     </div>
@@ -15,7 +14,6 @@
 import ScreenReader from '~/components/layout/ScreenReader.vue'
 import SkipLinks from '~/components/layout/SkipLinks.vue'
 import Header from '~/components/layout/Header.vue'
-import Breadcrumbs from '~/components/layout/Breadcrumbs.vue'
 import Footer from '~/components/layout/Footer.vue'
 
 export default {
@@ -23,7 +21,6 @@ export default {
     ScreenReader,
     SkipLinks,
     Header,
-    Breadcrumbs,
     Footer
   },
   data() {
