@@ -6,30 +6,26 @@
         to="/">
         <icon-home/>
       </nuxt-link>
-      <nav id="navigation">
-        <ul class="flex">
-          <li>
-            <nuxt-link
-              class="text-teal-600 hover:underline"
-              to="/articles/inland">
-              Inland
-            </nuxt-link>
-          </li>
-          <li>
-            <nuxt-link
-              class="text-teal-600 hover:underline ml-2"
-              to="/articles/international">
-              International
-            </nuxt-link>
-          </li>
-        </ul>
-      </nav>
+      <Navigation :nav="navigation"/>
     </div>
   </header>
 </template>
 <script>
 import IconHome from "@/components/icons/icon-home";
+import Navigation from "@/components/layout/Navigation";
 export default {
-  components: {IconHome}
+  components: {
+    Navigation,
+    IconHome
+  },
+  data() {
+    return {
+      navigation: {},
+    }
+  },
+  async fetch () {
+    let preview_token = 'AZg8k4iwgfML7XgBWjtsUQtt';
+    this.navigation = await this.$axios.$get(`https://api.storyblok.com/v1/cdn/stories/navigation/navigation-main/?token=${preview_token}&version=draft`)
+  },
 }
 </script>

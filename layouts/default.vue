@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <ScreenReader/>
     <SkipLinks :screenReader="screenReader"/>
     <Header/>
@@ -7,7 +7,7 @@
       <Nuxt/>
     </div>
     <Footer/>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -27,15 +27,24 @@ export default {
     return {
       screenReader: false,
       firstCall: true,
+      links: {},
     }
   },
   beforeMount() {
     if(localStorage.getItem('sr')) {
-      this.screenReader = localStorage.getItem('sr');
+      if (localStorage.getItem('sr') === 'true') {
+        this.screenReader = true;
+      } else {
+        this.screenReader = false;
+      }
       this.firstCall = false;
     } else {
       localStorage.setItem('sr', false);
     }
-  }
+  },
+  async fetch () {
+    let preview_token = 'AZg8k4iwgfML7XgBWjtsUQtt';
+    this.links = await this.$axios.$get(`https://api.storyblok.com/v1/cdn/links?starts_with=articles/&token=${preview_token}`)
+  },
 }
 </script>
