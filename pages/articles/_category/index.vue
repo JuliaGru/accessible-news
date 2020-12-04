@@ -1,6 +1,5 @@
 <template>
   <section>
-    {{ $route.params }}
     <Overview :stories="stories"/>
   </section>
 </template>

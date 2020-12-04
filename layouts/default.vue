@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <ScreenReader/>
     <SkipLinks :screenReader="screenReader"/>
     <Header/>
@@ -8,7 +8,7 @@
       <Nuxt/>
     </div>
     <Footer/>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -35,7 +35,11 @@ export default {
   },
   beforeMount() {
     if(localStorage.getItem('sr')) {
-      this.screenReader = localStorage.getItem('sr');
+      if (localStorage.getItem('sr') === 'true') {
+        this.screenReader = true;
+      } else {
+        this.screenReader = false;
+      }
       this.firstCall = false;
     } else {
       localStorage.setItem('sr', false);
