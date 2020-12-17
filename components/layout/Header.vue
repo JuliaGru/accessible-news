@@ -3,7 +3,7 @@
     <div class="max-w-5xl md:flex justify-between mx-auto">
       <nuxt-link
         class="text-teal-600 hover:underline"
-        to="/">
+        to="/" title="Zur Startseite">
         <icon-home/>
       </nuxt-link>
       <Navigation :nav="navigation"/>

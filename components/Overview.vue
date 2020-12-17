@@ -2,8 +2,8 @@
   <section>
     <h1>Articles Overview</h1>
     <SubNavigation :nav="navigation" v-if="!$route.params.subcategory"/>
-    <ul class="flex flex-wrap">
-      <li
+    <div class="flex flex-wrap">
+      <div
         v-for="article in stories" :key="article._uid"
         class="w-1/2 pr-6 pb-6" style="padding-left: 0; margin: 0;">
         <article-teaser
@@ -11,8 +11,8 @@
           :article-link="'/' + article.full_slug"
           :article-content="article.content"/>
         <p v-else class="px-4 py-2 text-white bg-red-700 text-center rounded">This content loads on save. <strong>Save the entry & reload.</strong></p>
-      </li>
-    </ul>
+      </div>
+    </div>
   </section>
 </template>
 

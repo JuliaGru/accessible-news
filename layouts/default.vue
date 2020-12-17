@@ -39,8 +39,6 @@ export default {
         this.screenReader = false;
       }
       this.firstCall = false;
-    } else {
-      localStorage.setItem('sr', false);
     }
   },
   async fetch () {
