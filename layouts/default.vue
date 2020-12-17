@@ -1,5 +1,6 @@
 <template>
   <section>
+    <VueAnnouncer />
     <ScreenReader/>
     <SkipLinks :screenReader="screenReader"/>
     <Header/>

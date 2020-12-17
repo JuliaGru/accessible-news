@@ -47,6 +47,11 @@ export default {
         context.error({statusCode: res.response.status, message: res.response.data})
       }
     })
+  },
+  head() {
+    return {
+      title: "Accessible News - " + this.story.name,
+    }
   }
 }
 </script>

@@ -22,8 +22,8 @@
       <span class="inline-block md:ml-8">© Accessible News 2020</span>
     </div>
     <div v-if="!$parent.firstCall" class="max-w-5xl mx-auto text-center mt-2 text-sm text-gray-500">
-      <button v-if="$parent.screenReader" @click="changeScreenReader(false)">Change to visual optimized version</button>
-      <button v-else @click="changeScreenReader(true)">Change to screen reader optimized version</button>
+      <button v-if="$parent.screenReader" @click="changeScreenReader(false, 'Visuelle Version')">Zur visuell optimierten Version</button>
+      <button v-else @click="changeScreenReader(true, 'Screen Reader Version')">Zur Screen Reader optimierten Version</button>
     </div>
   </footer>
   <!-- icons from https://heroicons.com/ -->
@@ -32,9 +32,10 @@
 <script>
 export default {
   methods: {
-    changeScreenReader: function (sr) {
+    changeScreenReader: function (sr, text) {
       this.$parent.screenReader = sr;
       localStorage.setItem('sr', sr);
+      this.$announcer.assertive(text)
     }
   }
 }
