@@ -57,6 +57,9 @@ export default {
   head() {
     return {
       title: "Accessible News",
+      htmlAttrs: {
+        lang: 'de'
+      },
     }
   }
 }
