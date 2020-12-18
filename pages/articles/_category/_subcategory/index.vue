@@ -10,7 +10,17 @@ export default {
   components: {Overview},
   data () {
     return {
-      stories: []
+      stories: [],
+      category: ''
+    }
+  },
+  created() {
+    if(this.$route.params.subcategory === 'bundeslaender') {
+      this.category = 'Bundesländer';
+    } else if(this.$route.params.subcategory === 'eu') {
+      this.category = 'EU';
+    } else {
+      this.category = this.$route.params.subcategory.replace(/^./, this.$route.params.subcategory[0].toUpperCase());
     }
   },
   asyncData (context) {
@@ -26,6 +36,11 @@ export default {
         context.error({ statusCode: res.response.status, message: res.response.data })
       }
     })
+  },
+  head() {
+    return {
+      title: "Accessible News - " +  this.category,
+    }
   }
 }
 </script>

@@ -1,6 +1,7 @@
 <template>
   <div
     v-editable="blok">
+    {{ blok }}
     <component
       v-for="blok in blok.body"
       :key="blok._uid"

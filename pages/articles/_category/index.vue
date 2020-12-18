@@ -10,8 +10,12 @@ export default {
   components: {Overview},
   data () {
     return {
-      stories: []
+      stories: [],
+      category: ''
     }
+  },
+  created() {
+    this.category = this.$route.params.category.replace(/^./, this.$route.params.category[0].toUpperCase());
   },
   asyncData (context) {
     return context.app.$storyapi.get('cdn/stories', {
@@ -26,6 +30,11 @@ export default {
         context.error({ statusCode: res.response.status, message: res.response.data })
       }
     })
+  },
+  head() {
+    return {
+      title: "Accessible News - " +  this.category,
+    }
   }
 }
 </script>
