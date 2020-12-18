@@ -16,6 +16,9 @@ export default {
       story: {content: {}},
     }
   },
+  created() {
+    this.$store.commit('store/setTheme', "theme-" + this.$route.params.category)
+  },
   mounted() {
     // Use the input event for instant update of content
     this.$storybridge.on('input', (event) => {

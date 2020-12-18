@@ -15,6 +15,7 @@ export default {
     }
   },
   created() {
+    this.$store.commit('store/setTheme', "theme-" + this.$route.params.category)
     this.category = this.$route.params.category.replace(/^./, this.$route.params.category[0].toUpperCase());
   },
   asyncData (context) {

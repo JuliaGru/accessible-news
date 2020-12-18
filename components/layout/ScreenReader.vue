@@ -12,7 +12,7 @@
 export default {
   methods: {
     changeScreenReader: function (sr) {
-      this.$store.commit('screenReader/setReader', sr)
+      this.$store.commit('store/setReader', sr)
       this.$parent.firstCall = false;
       localStorage.setItem('sr', sr);
     }

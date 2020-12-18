@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section :class="$store.state.store.theme">
     <VueAnnouncer />
     <ScreenReader/>
     <SkipLinks/>
@@ -33,9 +33,9 @@ export default {
   beforeMount() {
     if(localStorage.getItem('sr')) {
       if (localStorage.getItem('sr') === 'true') {
-        this.$store.commit('screenReader/setReader', true)
+        this.$store.commit('store/setReader', true)
       } else {
-        this.$store.commit('screenReader/setReader', false)
+        this.$store.commit('store/setReader', false)
       }
       this.firstCall = false;
     }

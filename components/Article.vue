@@ -3,7 +3,7 @@
     v-editable="blok" :class="tagClass">
     <span class="uppercase text-gray-500">{{ blok.tag }}</span>
     <h1>{{ blok.name }}</h1>
-    <div v-if="$store.state.screenReader.screenReader">
+    <div v-if="$store.state.store.screenReader">
       <div><span>Autor {{ blok.author }}</span></div>
       <div><span>Erschienen am {{ $dateFns.format(blok.date, 'dd.MM.yyyy') }}</span></div>
       <div><span>{{ blok.comments }} Kommentare</span></div>

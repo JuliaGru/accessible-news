@@ -15,6 +15,7 @@ export default {
     }
   },
   created() {
+    this.$store.commit('store/setTheme', "theme-" + this.$route.params.category)
     if(this.$route.params.subcategory === 'bundeslaender') {
       this.category = 'Bundesländer';
     } else if(this.$route.params.subcategory === 'eu') {
