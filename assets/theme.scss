@@ -39,24 +39,34 @@ body {
       }
     }
   }
+}
 
-  a {
-    text-decoration: none;
-    position: relative;
-    z-index: 0;
+a {
+  text-decoration: none !important;
+  position: relative;
+  z-index: 0;
 
+  &:after {
+    content: '';
+    @apply h-1 absolute left-0 bottom-0 w-full transition-all duration-200;
+    background: var( --theme-color );
+    z-index: -1;
+  }
+
+  &:hover {
     &:after {
-      content: '';
-      @apply h-1 absolute left-0 bottom-0 w-full transition-all duration-200;
-      background: var( --theme-color );
-      z-index: -1;
+      @apply opacity-0;
     }
+  }
+}
 
-    &:hover {
-      &:after {
-        @apply opacity-0;
-      }
-    }
+.home {
+  &:after {
+    content: none;
+  }
+
+  svg {
+    stroke: var( --theme-color);
   }
 }
 

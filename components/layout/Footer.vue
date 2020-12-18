@@ -5,14 +5,12 @@
         <ul class="flex justify-center">
           <li class="mr-3">
             <nuxt-link
-              class="text-teal-600 hover:underline"
               to="/impressum">
               Impressum
             </nuxt-link>
           </li>
           <li>
             <nuxt-link
-              class="text-teal-600 hover:underline"
               to="/datenschutz">
               Datenschutz
             </nuxt-link>

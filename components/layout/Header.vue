@@ -1,9 +1,7 @@
 <template>
   <header class="mb-8 border-b p-6">
     <div class="max-w-5xl md:flex justify-between mx-auto">
-      <nuxt-link
-        class="text-teal-600 hover:underline"
-        to="/" title="Zur Startseite">
+      <nuxt-link to="/" title="Zur Startseite" class="home">
         <icon-home/>
       </nuxt-link>
       <Navigation :nav="navigation"/>
