@@ -1,7 +1,7 @@
 <template>
-  <nav id="navigation" v-if="nav.story">
+  <nav id="subNavigation" v-if="nav.story" class="bg-var-light px-4 py-2 mb-4">
     <ul class="flex">
-      <li v-for="nav_item in nav.story.content.navigation" class="text-teal-600 hover:underline ml-2">
+      <li v-for="nav_item in nav.story.content.navigation">
         <nuxt-link :to="'/articles/' + $route.params.category + nav_item.link.url">{{ nav_item.name }}</nuxt-link>
       </li>
     </ul>

@@ -1,16 +1,14 @@
 <template>
   <section>
-    <h1>Articles Overview</h1>
+    <h1>{{ category }}</h1>
     <SubNavigation :nav="navigation" v-if="!$route.params.subcategory"/>
-    <div class="flex flex-wrap">
+    <div class="flex flex-wrap -mx-3">
       <div
         v-for="article in stories" :key="article._uid"
-        class="w-1/2 pr-6 pb-6" style="padding-left: 0; margin: 0;">
+        class="teaser w-full md:w-1/2 px-3 mb-6">
         <article-teaser
-          v-if="article.content"
           :article-link="'/' + article.full_slug"
           :article-content="article.content"/>
-        <p v-else class="px-4 py-2 text-white bg-red-700 text-center rounded">This content loads on save. <strong>Save the entry & reload.</strong></p>
       </div>
     </div>
   </section>
@@ -24,6 +22,10 @@ export default {
   props: {
     stories: {
       type: Array,
+      required: true
+    },
+    category: {
+      type: String,
       required: true
     }
   },
