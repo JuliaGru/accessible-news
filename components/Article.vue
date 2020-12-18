@@ -1,6 +1,6 @@
 <template>
   <div
-    v-editable="blok" :class="tagClass">
+    v-editable="blok">
     <span class="uppercase text-gray-500">{{ blok.tag }}</span>
     <h1>{{ blok.name }}</h1>
     <div v-if="$store.state.store.screenReader">
@@ -39,11 +39,6 @@ export default {
     category: {
       type: String,
       required: true
-    }
-  },
-  data() {
-    return {
-      tagClass: `theme-${this.category}`,
     }
   },
 }
