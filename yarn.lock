@@ -1095,6 +1095,13 @@
     consola "^2.15.0"
     defu "^3.2.2"
 
+"@nuxtjs/date-fns@^1.4.3":
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/date-fns/-/date-fns-1.4.3.tgz#2f076295690fdac33330fd594f198fb2a7a779a1"
+  integrity sha512-9CZyyV43EAKBeAwQaaPD38tKgxY+Sixr9NIP00MtpnsPrCgir8C1ne8c7KbrCESLRGdKjs8A1I3RN92W31woAw==
+  dependencies:
+    date-fns "^2.16.1"
+
 "@nuxtjs/proxy@^2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@nuxtjs/proxy/-/proxy-2.0.1.tgz#2469b6e316311aa8c60d348502a54bfe6d5536aa"
@@ -1153,6 +1160,11 @@
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
+
+"@vue-a11y/announcer@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@vue-a11y/announcer/-/announcer-2.1.0.tgz#ed725e90b91870c76285840e0aaa637cfafbf27f"
+  integrity sha512-7V1osiJQxZPBA+2duF2nZugwgbIba/yvKLsHWvGIBJGY0VZhR4vYyFH3VFyFH2Yi46tHEVBN+X+a0uQaJMhCsQ==
 
 "@vue/babel-helper-vue-jsx-merge-props@^1.0.0":
   version "1.0.0"
@@ -2761,6 +2773,11 @@ cyclist@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"
   integrity sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=
+
+date-fns@^2.16.1:
+  version "2.16.1"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.16.1.tgz#05775792c3f3331da812af253e1a935851d3834b"
+  integrity sha512-sAJVKx/FqrLYHAQeN7VpJrPhagZc9R4ImZIWYRFZaaohR3KzmuK88touwsSwSVT8Qcbd4zoDsnGfX4GFB4imyQ==
 
 de-indent@^1.0.2:
   version "1.0.2"

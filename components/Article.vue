@@ -3,18 +3,25 @@
     v-editable="blok" :class="tagClass">
     <span class="uppercase text-gray-500">{{ blok.tag }}</span>
     <h1>{{ blok.name }}</h1>
-    <div><icon-user /><span class="ml-1">{{ blok.author }}</span></div>
-    <div><icon-calendar /><span class="ml-1">{{ blok.date }}</span></div>
-    <div><icon-comments /><span class="ml-1">{{ blok.comments }}</span></div>
+    <div v-if="$store.state.screenReader.screenReader">
+      <div><span>{{ blok.author }}</span></div>
+      <div><span>{{ $dateFns.format(blok.date, 'dd.MM.yyyy') }}</span></div>
+      <div><span>{{ blok.comments }}</span></div>
+    </div>
+    <div v-else>
+      <div><icon-user /><span class="ml-1">{{ blok.author }}</span></div>
+      <div><icon-calendar /><span class="ml-1">{{ $dateFns.format(blok.date, 'dd.MM.yyyy') }}</span></div>
+      <div><icon-comments /><span class="ml-1">{{ blok.comments }}</span></div>
+    </div>
 
-    <span class="mx-1 font-bold uppercase">{{ blok.type }}</span>/<span class="ml-1 text-sm">{{ category }}</span>
+    <span class="mr-1 font-bold uppercase">{{ blok.type }}</span>/<span class="ml-1 text-sm">{{ category }}</span>
     <p class="font-bold">{{ blok.teaser }}</p>
     <div
       :key="blok._uid"
       v-for="blok in blok.content">
       <component :blok="blok" :is="blok.component"/>
     </div>
-    <a :href="blok.link.url" target="_blank">{{ blok.link.url }}</a>
+    <a :href="blok.link.url" target="_blank">Zum originalen Artikel</a>
   </div>
 </template>
 

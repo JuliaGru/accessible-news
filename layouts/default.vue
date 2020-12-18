@@ -2,7 +2,7 @@
   <section>
     <VueAnnouncer />
     <ScreenReader/>
-    <SkipLinks :screenReader="screenReader"/>
+    <SkipLinks/>
     <Header/>
     <div id="content" class="prose mx-auto px-6 py-3">
       <Nuxt/>
@@ -26,7 +26,6 @@ export default {
   },
   data() {
     return {
-      screenReader: false,
       firstCall: true,
       links: {},
     }
@@ -34,9 +33,9 @@ export default {
   beforeMount() {
     if(localStorage.getItem('sr')) {
       if (localStorage.getItem('sr') === 'true') {
-        this.screenReader = true;
+        this.$store.commit('screenReader/setReader', true)
       } else {
-        this.screenReader = false;
+        this.$store.commit('screenReader/setReader', false)
       }
       this.firstCall = false;
     }

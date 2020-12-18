@@ -22,7 +22,7 @@
       <span class="inline-block md:ml-8">© Accessible News 2020</span>
     </div>
     <div v-if="!$parent.firstCall" class="max-w-5xl mx-auto text-center mt-2 text-sm text-gray-500">
-      <button v-if="$parent.screenReader" @click="changeScreenReader(false, 'Sie verwenden die visuelle Version')">Zur visuell optimierten Version</button>
+      <button v-if="$store.state.screenReader.screenReader" @click="changeScreenReader(false, 'Sie verwenden die visuelle Version')">Zur visuell optimierten Version</button>
       <button v-else @click="changeScreenReader(true, 'Sie verwenden die Screen Reader Version')">Zur Screen Reader optimierten Version</button>
     </div>
   </footer>
@@ -33,7 +33,7 @@
 export default {
   methods: {
     changeScreenReader: function (sr, text) {
-      this.$parent.screenReader = sr;
+      this.$store.commit('screenReader/setReader', sr)
       localStorage.setItem('sr', sr);
       this.$announcer.assertive(text)
     }

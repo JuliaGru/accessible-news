@@ -8,12 +8,6 @@
 
 <script>
 export default {
-  props: {
-    screenReader: {
-      type: Boolean,
-      required: true
-    }
-  },
   data() {
     return {
       skipLink: 'focus:opacity-100 opacity-0 absolute top-10 left-0 p-2 font-bold border-2 bg-white text-gray-700 pointer-events-none',
