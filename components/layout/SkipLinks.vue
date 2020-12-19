@@ -1,8 +1,8 @@
 <template>
   <section>
-    <a href="#navigation" :class="skipLink" :style="top">Zur Navigation</a>
-    <a href="#content" :class="skipLink" :style="top">Zum Inhalt</a>
-    <a href="#footer" :class="skipLink" :style="top">Zum Footer</a>
+    <a href="#skiplink_navigation" :class="skipLink" :style="top">Zur Navigation</a>
+    <a href="#skiplink_content" :class="skipLink" :style="top">Zum Inhalt</a>
+    <a href="#skiplink_footer" :class="skipLink" :style="top">Zum Footer</a>
   </section>
 </template>
 

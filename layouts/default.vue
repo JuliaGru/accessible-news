@@ -2,8 +2,10 @@
   <section :class="$store.state.store.theme">
     <VueAnnouncer />
     <ScreenReader/>
+    <a aria-label="Skip Links" id="skiplink" ref="skiplink" href="#" tabindex="-1"></a>
     <SkipLinks/>
     <Header/>
+    <a aria-label="Inhalt" id="skiplink_content" href="#" tabindex="-1"></a>
     <div id="content" class="prose mx-auto px-6 py-3">
       <Nuxt/>
     </div>
@@ -28,6 +30,13 @@ export default {
     return {
       firstCall: true,
       links: {},
+    }
+  },
+  watch: {
+    $route() {
+      if($nuxt.$route.hash === "") {
+        this.$refs["skiplink"].focus();
+      }
     }
   },
   beforeMount() {
