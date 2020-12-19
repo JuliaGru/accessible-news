@@ -1,9 +1,9 @@
 <template>
-  <section>
+  <div>
     <rich-text-renderer
       :document="blok.text"
     />
-  </section>
+  </div>
 </template>
 
 <script>

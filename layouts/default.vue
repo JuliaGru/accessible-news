@@ -1,5 +1,5 @@
 <template>
-  <section :class="$store.state.store.theme">
+  <div :class="$store.state.store.theme">
     <VueAnnouncer />
     <ScreenReader/>
     <a aria-label="Skip Links" id="skiplink" ref="skiplink" href="#" tabindex="-1"></a>
@@ -10,7 +10,7 @@
       <Nuxt/>
     </div>
     <Footer/>
-  </section>
+  </div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <div>
     <h1>{{ category }}</h1>
     <SubNavigation :nav="navigation" v-if="!$route.params.subcategory"/>
     <div class="flex flex-wrap -mx-3">
@@ -11,7 +11,7 @@
           :article-content="article.content"/>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 

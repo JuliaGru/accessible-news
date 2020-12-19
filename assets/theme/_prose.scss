@@ -1,8 +1,9 @@
 .prose {
   max-width: 800px;
 
-  h1 {
+  h1, h2, h3 {
     color: var( --theme-color-dark );
+    @apply font-bold;
   }
 
   #subNavigation {
@@ -17,6 +18,10 @@
         }
       }
     }
+  }
+
+  .img {
+    @apply mt-0 mb-2;
   }
 }
 
