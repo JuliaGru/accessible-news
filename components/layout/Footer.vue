@@ -6,16 +6,10 @@
         <nav>
           <ul class="flex justify-center">
             <li class="mr-3">
-              <nuxt-link
-                to="/impressum">
-                Impressum
-              </nuxt-link>
+              <nuxt-link to="/impressum">Impressum</nuxt-link>
             </li>
             <li>
-              <nuxt-link
-                to="/datenschutz">
-                Datenschutz
-              </nuxt-link>
+              <nuxt-link to="/datenschutz">Datenschutz</nuxt-link>
             </li>
           </ul>
         </nav>
