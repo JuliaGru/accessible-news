@@ -16,7 +16,13 @@ export default {
   },
   created() {
     this.$store.commit('store/setTheme', "theme-" + this.$route.params.category)
-    this.category = this.$route.params.category.replace(/^./, this.$route.params.category[0].toUpperCase());
+    if(this.$route.params.category === 'diestandard') {
+      this.category = 'dieStandard';
+    } else {
+      this.category = this.$route.params.category.replace(/^./, this.$route.params.category[0].toUpperCase());
+    }
+
+
   },
   asyncData (context) {
     return context.app.$storyapi.get('cdn/stories', {

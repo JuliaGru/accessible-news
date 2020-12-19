@@ -10,13 +10,13 @@
       <div>Erschienen am: {{ $dateFns.format(blok.date, 'dd.MM.yyyy') }}</div>
       <div>{{ blok.comments }} Kommentare</div>
       <div>Schlagwort: {{ blok.tag }}</div>
-      <div>Ein {{ type }}</div>
+      <div>Ein {{ blok.type }}</div>
     </div>
     <div v-else>
       <div><icon-user /><span class="ml-1">{{ blok.author }}</span></div>
       <div><icon-calendar /><span class="ml-1">{{ $dateFns.format(blok.date, 'dd.MM.yyyy') }}</span></div>
       <div><icon-comments /><span class="ml-1">{{ blok.comments }}</span></div>
-      <div><icon-text /><span class="ml-1">{{ type }}</span></div>
+      <div><icon-text /><span class="ml-1">{{ blok.type }}</span></div>
     </div>
 
     <p class="font-bold"><span v-if="$store.state.store.screenReader">Teaser: </span>{{ blok.teaser }}</p>
@@ -47,14 +47,6 @@ export default {
       type: String,
       required: true
     },
-  },
-  data () {
-    return {
-      type: '',
-    }
-  },
-  created() {
-    this.type = this.blok.type.replace(/^./, this.blok.type[0].toUpperCase());
   },
 }
 </script>
