@@ -20,7 +20,7 @@
     </div>
 
     <p class="font-bold"><span v-if="$store.state.store.screenReader">Teaser: </span>{{ blok.teaser }}</p>
-    <Img v-if="blok.image" :source="blok.image.filename" :alt="blok.image.alt" :title="blok.image.title" :copyright="blok.image.copyright" />
+    <Img v-if="blok.image.id !== null" :source="blok.image.filename" :alt="blok.image.alt" :title="blok.image.title" :copyright="blok.image.copyright" />
     <div
       :key="blok._uid"
       v-for="blok in blok.content">
