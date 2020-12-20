@@ -10,4 +10,16 @@ module.exports = {
   plugins: [
     require('@tailwindcss/typography')
   ],
+  purge: {
+    // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
+    enabled: false,
+    content: [
+      'components/**/*.vue',
+      'layouts/**/*.vue',
+      'pages/**/*.vue',
+      'plugins/**/*.js',
+      'nuxt.config.js'
+    ],
+    whitelistPatterns: [/^theme-/],
+  }
 }
