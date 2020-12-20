@@ -2,7 +2,7 @@
   "name": "accessible-news",
   "version": "1.0.0",
   "description": "",
-  "author": "Samuel Snopko",
+  "author": "Julia Gruber",
   "private": true,
   "scripts": {
     "dev": "nuxt",
