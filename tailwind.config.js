@@ -20,6 +20,5 @@ module.exports = {
       'plugins/**/*.js',
       'nuxt.config.js'
     ],
-    whitelistPatterns: [/^theme-/],
   }
 }
