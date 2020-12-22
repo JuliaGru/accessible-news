@@ -1,3 +1,5 @@
+/* purgecss start ignore */
+
 .theme {
   &-default {
     --theme-color: #CCC;
@@ -136,3 +138,6 @@
 .bg-var-light {
   background-color: rgba(var( --theme-color-rgb ), 0.4);
 }
+
+
+/* purgecss end ignore */
