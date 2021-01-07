@@ -17,11 +17,8 @@ module.exports = {
       'components/**/*.vue',
       'layouts/**/*.vue',
       'pages/**/*.vue',
-      'plugins/**/*.js',
       'nuxt.config.js'
     ],
-    options: {
-      safelist: ['theme-inland', 'px-4'],
-    },
+    variables: false,
   }
 }
