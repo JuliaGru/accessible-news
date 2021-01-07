@@ -1,5 +1,3 @@
-/* purgecss start ignore */
-
 .theme {
   &-default {
     --theme-color: #CCC;
@@ -73,27 +71,11 @@
     --theme-color-dark: #ab5652;
   }
 
-  /*
-  &-karriere {
-    --theme-color: #F7D9A1;
-    --theme-color-rgb: 247, 217, 161;
-    --theme-color-dark: #946713;
-  }
-  */
-
   &-immobilien {
     --theme-color: #C3DCBC;
     --theme-color-rgb: 195, 220, 188;
     --theme-color-dark: #447d34;
   }
-
-  /*
-  &-zukunft {
-    --theme-color: #F7B6BD;
-    --theme-color-rgb: 247, 182, 189;
-    --theme-color-dark: #bb4552;
-  }
-   */
 
   &-gesundheit {
     --theme-color: #ECBEAC;
@@ -107,26 +89,6 @@
     --theme-color-dark: #864f90;
   }
 
-  /*
-  &-familie {
-    --theme-color: #B4E3F8;
-    --theme-color-rgb: 180, 227, 248;
-    --theme-color-dark: #23779c;
-  }
-
-  &-bildung {
-    --theme-color: #E9C4DE;
-    --theme-color-rgb: 233, 196, 222;
-    --theme-color-dark: #965e85;
-  }
-
-  &-reisen {
-    --theme-color: #d4e084;
-    --theme-color-rgb: 239, 245, 198;
-    --theme-color-dark: #687703;
-  }
-  */
-
   &-diestandard {
     --theme-color: #FFDFC2;
     --theme-color-rgb: 255, 223, 194;
@@ -138,6 +100,3 @@
 .bg-var-light {
   background-color: rgba(var( --theme-color-rgb ), 0.4);
 }
-
-
-/* purgecss end ignore */
