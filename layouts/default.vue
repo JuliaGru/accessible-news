@@ -1,5 +1,5 @@
 <template>
-  <div :class="$store.state.store.theme">
+  <div :class="$store.state.store.theme" class="theme-web">
     <VueAnnouncer />
     <ScreenReader/>
     <a aria-label="Skip Links" id="skiplink" ref="skiplink" href="#" tabindex="-1"></a>
