@@ -49,7 +49,7 @@ export default {
   asyncData (context) {
     return context.app.$storyapi.get('cdn/stories', {
       starts_with: 'articles/' + context.params.category + '/' + context.params.subcategory + '/',
-      version: 'draft'
+      version: 'published'
     }).then((res) => {
       return res.data
     }).catch((res) => {
