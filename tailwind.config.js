@@ -20,5 +20,6 @@ module.exports = {
       'nuxt.config.js'
     ],
     variables: false,
+    rejected: true,
   }
 }
