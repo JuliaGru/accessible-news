@@ -21,5 +21,6 @@ module.exports = {
     ],
     variables: false,
     rejected: true,
+    safelist: ['theme-web', 'theme-kultur', 'theme-inland']
   }
 }
