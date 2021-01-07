@@ -59,8 +59,8 @@ export default {
       title: "Accessible News",
       htmlAttrs: {
         lang: 'de'
-      },
+      }
     }
-  }
+  },
 }
 </script>
