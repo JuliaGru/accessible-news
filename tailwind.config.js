@@ -12,8 +12,16 @@ module.exports = {
   ],
   purge: {
     // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
-    enabled: false,
+    enabled: process.env.NODE_ENV === 'production',
     content: [
+      'components/**/*.vue',
+      'layouts/**/*.vue',
+      'pages/**/*.vue',
+      'plugins/**/*.js',
+      'nuxt.config.js'
     ],
+    options: {
+      safelist: ['theme-inland', 'px-4'],
+    },
   }
 }
