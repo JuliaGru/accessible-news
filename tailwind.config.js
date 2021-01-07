@@ -12,7 +12,7 @@ module.exports = {
   ],
   purge: {
     // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
-    enabled: process.env.NODE_ENV === 'production',
+    enabled: true,
     content: [
       'components/**/*.vue',
       'layouts/**/*.vue',
@@ -20,5 +20,6 @@ module.exports = {
       'plugins/**/*.js',
       'nuxt.config.js'
     ],
+    whitelist: ['.theme-interational'],
   }
 }
