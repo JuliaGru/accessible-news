@@ -62,7 +62,7 @@ export default {
   },
   head() {
     return {
-      title: "Accessible News - " +  this.category,
+      title: this.category + " - Accessible News",
       htmlAttrs: {
         lang: 'de'
       },
