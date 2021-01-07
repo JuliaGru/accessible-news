@@ -13,6 +13,20 @@
   </div>
 </template>
 
+<style>
+.theme-international {
+  --theme-color: #C1D9D9;
+  --theme-color-rgb: 193,217, 217;
+  --theme-color-dark: #507371;
+}
+
+.theme-inland {
+   --theme-color: #D7E3E8;
+   --theme-color-rgb: 215, 227, 232;
+   --theme-color-dark: #415963;
+ }
+</style>
+
 <script>
 import ScreenReader from '~/components/layout/ScreenReader.vue'
 import SkipLinks from '~/components/layout/SkipLinks.vue'
