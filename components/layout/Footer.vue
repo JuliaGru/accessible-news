@@ -13,7 +13,7 @@
             </li>
           </ul>
         </nav>
-        <span class="inline-block md:ml-8">© Accessible News 2020</span>
+        <span class="inline-block md:ml-8">© Accessible News {{ $dateFns.format(new Date(), 'yyyy') }}</span>
       </div>
       <div v-if="!$parent.firstCall" class="max-w-5xl mx-auto text-center mt-2 text-sm text-gray-500">
         <button v-if="$store.state.store.screenReader" @click="changeScreenReader(false, 'Sie verwenden die visuelle Version')">Zur visuell optimierten Version</button>
