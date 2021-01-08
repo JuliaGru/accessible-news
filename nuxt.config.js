@@ -39,7 +39,8 @@ export default {
   buildModules: [
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/date-fns'
+    '@nuxtjs/date-fns',
+    'nuxt-purgecss'
   ],
   /*
   ** Nuxt.js modules
@@ -57,6 +58,9 @@ export default {
   ],
   axios: {
     // proxy: true
+  },
+  purgeCSS: {
+    whitelist: () => ['theme-web'],
   },
   /*
   ** Build configuration
