@@ -60,7 +60,10 @@ export default {
     // proxy: true
   },
   purgeCSS: {
-    whitelist: () => ['theme-web'],
+    whitelistPatterns: [
+      /^theme-*/, // theme classes
+      /^announcer/, // announcer
+    ],
   },
   /*
   ** Build configuration
