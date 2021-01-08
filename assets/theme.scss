@@ -1,11 +1,4 @@
-/* purgecss start ignore */
-//@import "theme/theme-colors";
-/* purgecss end ignore */
-
-.bg-var-light {
-  background-color: rgba(var( --theme-color-rgb ), 0.4);
-}
-
+@import "theme/theme-colors";
 @import "theme/prose";
 @import "theme/link";
 @import "theme/button";

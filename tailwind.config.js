@@ -19,8 +19,5 @@ module.exports = {
       'pages/**/*.vue',
       'nuxt.config.js'
     ],
-    variables: false,
-    rejected: true,
-    safelist: ['theme-web', 'theme-kultur', 'theme-inland']
   }
 }
