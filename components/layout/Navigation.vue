@@ -74,6 +74,13 @@ export default {
     document.removeEventListener('focusin', this.focusChanged);
     window.removeEventListener('resize', this.shortMenu);
   },
+  watch: {
+    nav(newVal, oldVal) {
+      this.$nextTick(function () {
+        this.shortMenu();
+      })
+    }
+  },
   methods: {
     toggleNav(id) {
       if (id === this.navToggle) {
@@ -92,9 +99,7 @@ export default {
         let items = this.nav.story.content.navigation;
         for (let i = 0; i < items.length; i++ ) {
           this.itemsLength[i] = this.$refs.navitems[i].clientWidth;
-          console.log(this.itemsLength[i]);
         }
-        console.log(items.length);
         this.moreLength = this.$refs.more.clientWidth;
         this.first = false;
       }
@@ -125,8 +130,6 @@ export default {
       }  else {
         this.more = false;
       }
-
-      console.log(this.moreItems);
     }
   }
 }
