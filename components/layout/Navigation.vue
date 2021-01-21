@@ -4,7 +4,7 @@
     <nav id="navigation" v-if="nav.story">
       <ul class="flex" ref="nav" >
         <template v-for="(nav_item, index) in nav.story.content.navigation">
-          <li :class="{ hidden : moreItems[index]}" class="pl-4 flex items-center relative" ref="navitems">
+          <li v-bind:class="{ 'hidden' : moreItems[index]}" class="pl-4 flex items-center relative" ref="navitems">
             <nuxt-link :class="'nav-item-' + index" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
             <button class="sr-only sr-only-focusable focus:not-sr-only ml-1" :title="'Subnavigation ' + nav_item.name + ' öffnen'" :data-toggle="'toggle-' + index" :aria-expanded="index === navToggle" @click="toggleNav(index)">
               <template v-if="index === navToggle">
@@ -26,8 +26,8 @@
         </template>
         <template v-if="more">
           <li class="ml-4 flex items-center relative" ref="more">
-            <a href="#" >Mehr</a>
-            <ul class="absolute -left-2 top-8 p-3 pt-2 bg-white shadow-md w-40" style="top: 2rem; left: -0.75rem;">
+            <a href="#">Mehr</a>
+            <ul class="absolute -left-2 top-8 p-3 pt-2 bg-white shadow-md w-40" style="top: 2rem; left: auto; right: -0.75rem;">
               <template v-for="(nav_item, index) in nav.story.content.navigation">
                 <li v-if="moreItems[index]">
                   <nuxt-link :class="'nav-item-' + index" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
@@ -59,8 +59,11 @@ export default {
   data() {
     return {
       navToggle: -1,
-      moreItems: [false, false, false, false, false, false, false, false, false, false, false, false, true, true, true],
+      moreItems: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+      itemsLength: [],
       more: true,
+      moreLength: 0,
+      first: true,
     }
   },
   mounted() {
@@ -85,29 +88,41 @@ export default {
       }
     },
     shortMenu() {
+      if (this.first) {
+        let items = this.nav.story.content.navigation;
+        for (let i = 0; i < items.length; i++ ) {
+          this.itemsLength[i] = this.$refs.navitems[i].clientWidth;
+          console.log(this.itemsLength[i]);
+        }
+        console.log(items.length);
+        this.moreLength = this.$refs.more.clientWidth;
+        this.first = false;
+      }
       let items = this.nav.story.content.navigation;
       let summary = 0;
 
       let maxwidth = this.width - 30;
 
       for (let i = 0; i < items.length; i++ ) {
-        summary += this.$refs.navitems[i].clientWidth;
+        summary += this.itemsLength[i];
       }
 
       if (summary > maxwidth) {
         this.more = true;
-        summary += this.$refs.more.clientWidth;
+        summary += this.moreLength;
 
-        for (let i = items.length; i--;) {
+        for (let i = items.length - 1; i >= 0; i--) {
           if (summary > maxwidth) {
+            this.$set(this.moreItems, i, true)
             this.moreItems[i] = true;
           } else {
+            this.$set(this.moreItems, i, false)
             this.moreItems[i] = false;
           }
 
-          summary -= this.$refs.navitems[i].clientWidth;
+          summary -= this.itemsLength[i];
         }
-      } else {
+      }  else {
         this.more = false;
       }
 

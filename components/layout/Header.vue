@@ -1,6 +1,6 @@
 <template>
   <header class="mb-8 border-b p-6">
-    <div class="max-w-5xl md:flex justify-between mx-auto" ref="maxwidth">
+    <div class="max-w-5xl flex justify-between mx-auto" ref="maxwidth">
       <nuxt-link to="/" title="Zur Startseite" class="home">
         <icon-home/>
       </nuxt-link>
