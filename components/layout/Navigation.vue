@@ -4,7 +4,7 @@
     <nav id="navigation" v-if="nav.story">
       <ul class="flex" ref="nav" >
         <template v-for="(nav_item, index) in nav.story.content.navigation">
-          <li @mouseenter="toggleNav(index, true)" @mouseleave="toggleNav(index, false)" v-bind:class="{ 'hidden' : moreItems[index]}" class="pl-4 py-1 flex items-center relative" ref="navitems">
+          <li @mouseenter="toggleNav(index, true, $event)" @mouseleave="toggleNav(index, false, $event)" v-bind:class="{ 'hidden' : moreItems[index]}" class="pl-4 py-1 flex items-center relative" ref="navitems">
             <nuxt-link :class="'nav-item-' + index" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
             <button class="sr-only sr-only-focusable focus:not-sr-only ml-1" :title="'Subnavigation ' + nav_item.name + ' öffnen'" :data-toggle="'toggle-' + index" :aria-expanded="index === navToggle" @click="toggleNav(index, true)">
               <template v-if="index === navToggle">
@@ -24,7 +24,7 @@
           </li>
         </template>
         <template v-if="more">
-          <li @mouseenter="toggleNav(moreIndex, true)" @mouseleave="toggleNav(moreIndex, false)" class="ml-4 flex items-center relative" ref="more">
+          <li @mouseenter="toggleNav(moreIndex, true, $event)" @mouseleave="toggleNav(moreIndex, false, $event)" class="pl-4 py-1 flex items-center relative" ref="more">
             <a :class="'nav-item-' + moreIndex" href="#">Mehr</a>
             <button class="sr-only sr-only-focusable focus:not-sr-only ml-1" title="Mehr Navigationselemente" :data-toggle="'toggle-' + moreIndex" :aria-expanded="moreIndex === navToggle" @click="toggleNav(moreIndex, true)">
               <template v-if="moreIndex === navToggle">
@@ -34,15 +34,22 @@
                 <icon-arrow-down/>
               </template>
             </button>
-            <template v-if="moreIndex === navToggle">
-              <ul class="absolute -left-2 top-8 p-3 pt-2 bg-white shadow-md w-40" style="top: 2rem; left: auto; right: -0.75rem;">
+            <!-- <template v-if="moreIndex === navToggle || navToggle > moreIndex"> -->
+              <ul class="absolute -left-2 top-8 p-3 pt-2 bg-white shadow-md w-40" style="top: 2rem; left: auto; right: -0.75rem; text-align: right; z-index: 10">
                 <template v-for="(nav_item, index) in nav.story.content.navigation">
-                  <li v-if="moreItems[index]">
+                  <li class="w-full relative" v-if="moreItems[index]" @mouseenter="toggleNav(moreIndex + index, true, $event)" @mouseleave="toggleNav(moreIndex + index, false, $event)">
                     <nuxt-link :class="'nav-item-' + moreIndex" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
+                    <template v-if="moreIndex + index === navToggle">
+                      <ul v-if="nav_item.subnav" class="absolute -left-2 top-8 p-3 pt-2 bg-white shadow-md w-40" style="top: -0.75rem; left: -10rem; z-index: 11">
+                        <li v-for="nav_item_sub in nav_item.subnav">
+                          <nuxt-link :to="'/articles' + nav_item.link.url + nav_item_sub.link.url" :class="'nav-item-' + index">{{ nav_item_sub.name }}</nuxt-link>
+                        </li>
+                      </ul>
+                    </template>
                   </li>
                 </template>
               </ul>
-            </template>
+            <!-- </template> -->
           </li>
         </template>
       </ul>
@@ -93,7 +100,8 @@ export default {
     }
   },
   methods: {
-    toggleNav(id, out) {
+    toggleNav(id, out, event) {
+      event.stopPropagation();
       if (id === this.navToggle || !out) {
         this.navToggle = -1;
       } else {
