@@ -4,7 +4,7 @@
     <nav id="navigation" v-if="nav.story">
       <ul class="flex" ref="nav" >
         <template v-for="(nav_item, index) in nav.story.content.navigation">
-          <li @mouseenter="toggleNav(index, true)" @mouseleave="toggleNav(index, false)" v-bind:class="{ 'hidden' : moreItems[index]}" class="pl-4 flex items-center relative" ref="navitems">
+          <li @mouseenter="toggleNav(index, true)" @mouseleave="toggleNav(index, false)" v-bind:class="{ 'hidden' : moreItems[index]}" class="pl-4 py-1 flex items-center relative" ref="navitems">
             <nuxt-link :class="'nav-item-' + index" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
             <button class="sr-only sr-only-focusable focus:not-sr-only ml-1" :title="'Subnavigation ' + nav_item.name + ' öffnen'" :data-toggle="'toggle-' + index" :aria-expanded="index === navToggle" @click="toggleNav(index, true)">
               <template v-if="index === navToggle">
