@@ -1,10 +1,10 @@
 <template>
   <header class="mb-8 border-b p-6">
-    <div class="max-w-5xl md:flex justify-between mx-auto">
+    <div class="max-w-5xl md:flex justify-between mx-auto" ref="maxwidth">
       <nuxt-link to="/" title="Zur Startseite" class="home">
         <icon-home/>
       </nuxt-link>
-      <Navigation :nav="navigation"/>
+      <Navigation :nav="navigation" :width="maxWidth"/>
     </div>
   </header>
 </template>
@@ -19,6 +19,19 @@ export default {
   data() {
     return {
       navigation: {},
+      maxWidth: 1024,
+    }
+  },
+  mounted() {
+    this.maxWidth = this.$refs.maxwidth.clientWidth;
+    window.addEventListener('resize', this.resize);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resize);
+  },
+  methods: {
+    resize() {
+      this.maxWidth = this.$refs.maxwidth.clientWidth;
     }
   },
   async fetch () {

@@ -2,27 +2,117 @@
   <div>
     <a aria-label="Navigation" id="skiplink_navigation" href="#" tabindex="-1"></a>
     <nav id="navigation" v-if="nav.story">
-      <ul class="flex">
-        <li v-for="nav_item in nav.story.content.navigation" class="ml-2">
-          <nuxt-link :to="'/articles' + nav_item.link.url">{{ nav_item.name }}</nuxt-link>
-          <ul v-if="nav_item.subnav" class="hidden">
-            <li v-for="nav_item_sub in nav_item.subnav">
-              <nuxt-link :to="'/articles' + nav_item.link.url + nav_item_sub.link.url">{{ nav_item_sub.name }}</nuxt-link>
-            </li>
-          </ul>
-        </li>
+      <ul class="flex" ref="nav" >
+        <template v-for="(nav_item, index) in nav.story.content.navigation">
+          <li :class="{ hidden : moreItems[index]}" class="pl-4 flex items-center relative" ref="navitems">
+            <nuxt-link :class="'nav-item-' + index" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
+            <button class="sr-only sr-only-focusable focus:not-sr-only ml-1" :title="'Subnavigation ' + nav_item.name + ' öffnen'" :data-toggle="'toggle-' + index" :aria-expanded="index === navToggle" @click="toggleNav(index)">
+              <template v-if="index === navToggle">
+                <icon-arrow-up/>
+              </template>
+              <template v-else>
+                <icon-arrow-down/>
+              </template>
+            </button>
+
+            <template v-if="index === navToggle">
+              <ul v-if="nav_item.subnav" class="absolute -left-2 top-8 p-3 pt-2 bg-white shadow-md w-40" style="top: 2rem; left: -0.75rem;">
+                <li v-for="nav_item_sub in nav_item.subnav">
+                  <nuxt-link :to="'/articles' + nav_item.link.url + nav_item_sub.link.url" :class="'nav-item-' + index">{{ nav_item_sub.name }}</nuxt-link>
+                </li>
+              </ul>
+            </template>
+          </li>
+        </template>
+        <template v-if="more">
+          <li class="ml-4 flex items-center relative" ref="more">
+            <a href="#" >Mehr</a>
+            <ul class="absolute -left-2 top-8 p-3 pt-2 bg-white shadow-md w-40" style="top: 2rem; left: -0.75rem;">
+              <template v-for="(nav_item, index) in nav.story.content.navigation">
+                <li v-if="moreItems[index]">
+                  <nuxt-link :class="'nav-item-' + index" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
+                </li>
+              </template>
+            </ul>
+          </li>
+        </template>
       </ul>
     </nav>
   </div>
 </template>
 
 <script>
+import IconArrowDown from "@/components/icons/icon-arrow-down";
+import IconArrowUp from "@/components/icons/icon-arrow-up";
 export default {
+  components: {IconArrowUp, IconArrowDown},
   props: {
     nav: {
       type: Object,
       required: true
     },
+    width: {
+      type: Number,
+      return: true
+    }
   },
+  data() {
+    return {
+      navToggle: -1,
+      moreItems: [false, false, false, false, false, false, false, false, false, false, false, false, true, true, true],
+      more: true,
+    }
+  },
+  mounted() {
+    document.addEventListener('focusin', this.focusChanged);
+    window.addEventListener('resize', this.shortMenu);
+  },
+  beforeDestroy() {
+    document.removeEventListener('focusin', this.focusChanged);
+    window.removeEventListener('resize', this.shortMenu);
+  },
+  methods: {
+    toggleNav(id) {
+      if (id === this.navToggle) {
+        this.navToggle = -1;
+      } else {
+        this.navToggle = id;
+      }
+    },
+    focusChanged (event) {
+      if (this.navToggle !== -1 && !event.target.classList.contains('nav-item-' + this.navToggle)) {
+          this.navToggle = -1;
+      }
+    },
+    shortMenu() {
+      let items = this.nav.story.content.navigation;
+      let summary = 0;
+
+      let maxwidth = this.width - 30;
+
+      for (let i = 0; i < items.length; i++ ) {
+        summary += this.$refs.navitems[i].clientWidth;
+      }
+
+      if (summary > maxwidth) {
+        this.more = true;
+        summary += this.$refs.more.clientWidth;
+
+        for (let i = items.length; i--;) {
+          if (summary > maxwidth) {
+            this.moreItems[i] = true;
+          } else {
+            this.moreItems[i] = false;
+          }
+
+          summary -= this.$refs.navitems[i].clientWidth;
+        }
+      } else {
+        this.more = false;
+      }
+
+      console.log(this.moreItems);
+    }
+  }
 }
 </script>
