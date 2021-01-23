@@ -6,7 +6,7 @@
     <SkipLinks/>
     <Header/>
     <a aria-label="Inhalt" id="skiplink_content" href="#" tabindex="-1"></a>
-    <div id="content" class="prose mx-auto px-6 py-3">
+    <div id="content" class="prose mx-auto px-6 py-3" ref="content">
       <Nuxt/>
     </div>
     <Footer/>
@@ -35,7 +35,7 @@ export default {
   watch: {
     $route() {
       if($nuxt.$route.hash === "") {
-        this.$refs["skiplink"].focus();
+        this.$refs["content"].focus();
       }
     }
   },

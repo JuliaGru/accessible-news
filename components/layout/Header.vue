@@ -4,15 +4,17 @@
       <nuxt-link to="/" title="Zur Startseite" class="home">
         <icon-home/>
       </nuxt-link>
-      <Navigation :nav="navigation" :width="maxWidth"/>
+      <NavigationSR :nav="navigation" :width="maxWidth"/>
     </div>
   </header>
 </template>
 <script>
 import IconHome from "@/components/icons/icon-home";
 import Navigation from "@/components/layout/Navigation";
+import NavigationSR from "@/components/layout/NavigationSR";
 export default {
   components: {
+    NavigationSR,
     Navigation,
     IconHome
   },
