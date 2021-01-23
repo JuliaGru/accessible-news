@@ -4,15 +4,15 @@
     <nav id="navigation" v-if="nav.story">
       <ul class="flex" ref="nav" >
         <template v-for="(nav_item, index) in nav.story.content.navigation">
-          <li @mouseenter="toggleNav(index, true, $event)" @mouseleave="toggleNav(index, false, $event)" v-bind:class="{ 'hidden' : moreItems[index]}" class="pl-4 py-1 flex items-center relative" ref="navitems">
+          <li v-bind:class="{ 'hidden' : moreItems[index]}" class="pl-4 py-1 flex items-center relative" ref="navitems">
             <nuxt-link :class="'nav-item-' + index" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
-            <NavSubmenu :index="index" :navItem="nav_item" styleProp="top: 2rem; left: -0.75rem;"/>
+            <NavSubmenu :index="index" :navItem="nav_item" styleProp="display: none; top: 1.5rem; left: -0.75rem; padding-top: 1rem; z-index: -1;" :ifCondition="nav_item.subnav"/>
           </li>
         </template>
         <template v-if="more">
-          <li @mouseenter="toggleNav(moreIndex, true, $event)" @mouseleave="toggleNav(moreIndex, false, $event)" class="pl-4 py-1 flex items-center relative" ref="more">
-            <a :class="'nav-item-' + moreIndex" href="#">
-              Mehr
+          <li class="pl-4 py-1 flex items-center relative" ref="more">
+            <a :class="'nav-item-' + moreIndex" class="flex items-center" href="#">
+              <span class="mr-1">Mehr</span>
               <template v-if="moreIndex <= navToggle">
                 <icon-arrow-up/>
               </template>
@@ -20,22 +20,26 @@
                 <icon-arrow-down/>
               </template>
             </a>
-            <template v-if="moreIndex === navToggle || navToggle > moreIndex">
-              <ul class="absolute -left-2 top-8 p-3 pt-2 bg-white shadow-md w-40" style="top: 2rem; left: auto; right: -0.75rem; text-align: right; z-index: 10">
-                <template v-for="(nav_item, index) in nav.story.content.navigation">
-                  <li class="w-full relative" v-if="moreItems[index]" @mouseenter="toggleNav(moreIndex + index, true, $event)" @mouseleave="toggleNav(moreIndex + index, false, $event)">
-                    <nuxt-link :class="'nav-item-' + moreIndex" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
-                    <NavSubmenu :index="(moreIndex + index)" :navItem="nav_item" styleProp="top: -0.75rem; left: -10rem; z-index: 11"/>
-                  </li>
-                </template>
-              </ul>
-            </template>
+            <ul class="hidden absolute -left-2 top-8 p-3 pt-2 bg-white shadow-md w-40" style="top: 1.4rem; left: auto; right: -0.75rem; text-align: right; z-index: -1; padding-top: 1.1rem;">
+              <template v-for="(nav_item, index) in nav.story.content.navigation">
+                <li class="w-full relative" v-if="moreItems[index]">
+                  <nuxt-link :class="'nav-item-' + moreIndex" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
+                  <NavSubmenu :index="(moreIndex + index)" :navItem="nav_item" styleProp="display: none; top: -0.75rem; left: -10rem; z-index: -1;" :ifCondition="nav_item.subnav"/>
+                </li>
+              </template>
+            </ul>
           </li>
         </template>
       </ul>
     </nav>
   </div>
 </template>
+
+<style>
+li:hover > ul {
+  display: block !important;
+}
+</style>
 
 <script>
 import NavSubmenu from "@/components/layout/nav-helpers/NavSubmenu";
@@ -60,7 +64,6 @@ export default {
       itemsLength: [],
       more: true,
       moreLength: 0,
-      first: true,
       moreIndex: 0,
     }
   },
@@ -75,20 +78,17 @@ export default {
   watch: {
     nav(newVal, oldVal) {
       this.$nextTick(function () {
+        let items = this.nav.story.content.navigation;
+        for (let i = 0; i < items.length; i++ ) {
+          this.itemsLength[i] = this.$refs.navitems[i].clientWidth;
+        }
+        this.moreLength = this.$refs.more.clientWidth;
         this.shortMenu();
         this.moreIndex = this.nav.story.content.navigation.length;
       })
     }
   },
   methods: {
-    toggleNav(id, out, event) {
-      event.stopPropagation();
-      if (id === this.navToggle || !out) {
-        this.navToggle = -1;
-      } else {
-        this.navToggle = id;
-      }
-    },
     focusChanged (event) {
       if (this.navToggle !== -1 && !event.target.classList.contains('nav-item-' + this.navToggle)) {
         //check if index is within more navigation && if it is the last element
@@ -100,18 +100,10 @@ export default {
       }
     },
     shortMenu() {
-      if (this.first) {
-        let items = this.nav.story.content.navigation;
-        for (let i = 0; i < items.length; i++ ) {
-          this.itemsLength[i] = this.$refs.navitems[i].clientWidth;
-        }
-        this.moreLength = this.$refs.more.clientWidth;
-        this.first = false;
-      }
       let items = this.nav.story.content.navigation;
       let summary = 0;
 
-      let maxwidth = this.width - 30;
+      let maxwidth = this.width - 50;
 
       for (let i = 0; i < items.length; i++ ) {
         summary += this.itemsLength[i];

@@ -1,5 +1,5 @@
 <template>
-  <ul v-if="index === this.$parent.navToggle && navItem.subnav" class="absolute p-3 pt-2 bg-white shadow-md w-40" :style="styleProp">
+  <ul v-if="ifCondition" class="absolute p-3 pt-2 bg-white shadow-md w-40" :style="styleProp">
     <li v-for="nav_item_sub in navItem.subnav">
       <nuxt-link :to="'/articles' + navItem.link.url + nav_item_sub.link.url" :class="'nav-item-' + index">{{ nav_item_sub.name }}</nuxt-link>
     </li>
@@ -21,6 +21,10 @@ export default {
       type: String,
       required: true,
     },
+    ifCondition: {
+      type: Boolean,
+      required: true,
+    }
   },
 }
 </script>

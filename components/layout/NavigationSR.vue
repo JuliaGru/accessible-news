@@ -7,7 +7,7 @@
           <li v-bind:class="{ 'hidden' : moreItems[index]}" class="pl-4 py-1 flex items-center relative" ref="navitems">
             <nuxt-link :class="'nav-item-' + index" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
             <NavButton :title="'Subnavigation ' + nav_item.name + ' öffnen'" :index="index" :ifCondition="index === navToggle"/>
-            <NavSubmenu :index="index" :navItem="nav_item" styleProp="top: 2rem; left: -0.75rem;"/>
+            <NavSubmenu :index="index" :navItem="nav_item" styleProp="top: 2rem; left: -0.75rem;" :ifCondition="index === navToggle && nav_item.subnav"/>
           </li>
         </template>
         <template v-if="more">
@@ -20,7 +20,7 @@
                   <li class="w-full relative" v-if="moreItems[index]">
                     <nuxt-link :class="'nav-item-' + moreIndex" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
                     <NavButton :title="'Subnavigation ' + nav_item.name + ' öffnen'" :index="moreIndex + index" :class="'nav-item-' + moreIndex" :ifCondition="moreIndex + index === navToggle"/>
-                    <NavSubmenu :index="(moreIndex + index)" :navItem="nav_item" styleProp="top: -0.75rem; left: -10rem; z-index: 11"/>
+                    <NavSubmenu :index="(moreIndex + index)" :navItem="nav_item" styleProp="top: -0.75rem; left: -10rem; z-index: 11" :ifCondition="(moreIndex + index) === navToggle && nav_item.subnav"/>
                   </li>
                 </template>
               </ul>
@@ -54,7 +54,6 @@ export default {
       itemsLength: [],
       more: true,
       moreLength: 0,
-      first: true,
       moreIndex: 0,
     }
   },
@@ -69,6 +68,11 @@ export default {
   watch: {
     nav(newVal, oldVal) {
       this.$nextTick(function () {
+        let items = this.nav.story.content.navigation;
+        for (let i = 0; i < items.length; i++ ) {
+          this.itemsLength[i] = this.$refs.navitems[i].clientWidth;
+        }
+        this.moreLength = this.$refs.more.clientWidth;
         this.shortMenu();
         this.moreIndex = this.nav.story.content.navigation.length;
       })
@@ -86,14 +90,6 @@ export default {
       }
     },
     shortMenu() {
-      if (this.first) {
-        let items = this.nav.story.content.navigation;
-        for (let i = 0; i < items.length; i++ ) {
-          this.itemsLength[i] = this.$refs.navitems[i].clientWidth;
-        }
-        this.moreLength = this.$refs.more.clientWidth;
-        this.first = false;
-      }
       let items = this.nav.story.content.navigation;
       let summary = 0;
 

@@ -1,5 +1,5 @@
 <template>
-  <header class="mb-8 border-b p-6">
+  <header class="mb-8 border-b p-6 relative" style="z-index: 10;">
     <div class="max-w-5xl items-center flex justify-between mx-auto" ref="maxwidth">
       <nuxt-link to="/" title="Zur Startseite" class="home">
         <icon-home/>
