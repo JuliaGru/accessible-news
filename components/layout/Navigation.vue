@@ -6,54 +6,26 @@
         <template v-for="(nav_item, index) in nav.story.content.navigation">
           <li @mouseenter="toggleNav(index, true, $event)" @mouseleave="toggleNav(index, false, $event)" v-bind:class="{ 'hidden' : moreItems[index]}" class="pl-4 py-1 flex items-center relative" ref="navitems">
             <nuxt-link :class="'nav-item-' + index" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
-            <button class="sr-only sr-only-focusable focus:not-sr-only ml-1" :title="'Subnavigation ' + nav_item.name + ' öffnen'" :data-toggle="'toggle-' + index" :aria-expanded="index === navToggle" @click="toggleNav(index, true, $event)">
-              <template v-if="index === navToggle">
-                <icon-arrow-up/>
-              </template>
-              <template v-else>
-                <icon-arrow-down/>
-              </template>
-            </button>
-            <template v-if="index === navToggle">
-              <ul v-if="nav_item.subnav" class="absolute -left-2 top-8 p-3 pt-2 bg-white shadow-md w-40" style="top: 2rem; left: -0.75rem;">
-                <li v-for="nav_item_sub in nav_item.subnav">
-                  <nuxt-link :to="'/articles' + nav_item.link.url + nav_item_sub.link.url" :class="'nav-item-' + index">{{ nav_item_sub.name }}</nuxt-link>
-                </li>
-              </ul>
-            </template>
+            <NavSubmenu :index="index" :navItem="nav_item" styleProp="top: 2rem; left: -0.75rem;"/>
           </li>
         </template>
         <template v-if="more">
           <li @mouseenter="toggleNav(moreIndex, true, $event)" @mouseleave="toggleNav(moreIndex, false, $event)" class="pl-4 py-1 flex items-center relative" ref="more">
-            <a :class="'nav-item-' + moreIndex" href="#">Mehr</a>
-            <button class="sr-only sr-only-focusable focus:not-sr-only ml-1" title="Mehr Navigationselemente" :data-toggle="'toggle-' + moreIndex" :aria-expanded="moreIndex === navToggle" @click="toggleNav(moreIndex, true, $event)">
-              <template v-if="moreIndex === navToggle">
+            <a :class="'nav-item-' + moreIndex" href="#">
+              Mehr
+              <template v-if="moreIndex <= navToggle">
                 <icon-arrow-up/>
               </template>
               <template v-else>
                 <icon-arrow-down/>
               </template>
-            </button>
+            </a>
             <template v-if="moreIndex === navToggle || navToggle > moreIndex">
               <ul class="absolute -left-2 top-8 p-3 pt-2 bg-white shadow-md w-40" style="top: 2rem; left: auto; right: -0.75rem; text-align: right; z-index: 10">
                 <template v-for="(nav_item, index) in nav.story.content.navigation">
                   <li class="w-full relative" v-if="moreItems[index]" @mouseenter="toggleNav(moreIndex + index, true, $event)" @mouseleave="toggleNav(moreIndex + index, false, $event)">
                     <nuxt-link :class="'nav-item-' + moreIndex" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
-                    <button :class="'nav-item-' + moreIndex" class="sr-only sr-only-focusable focus:not-sr-only ml-1" :title="'Subnavigation ' + nav_item.name + ' öffnen'" :data-toggle="'toggle-' + moreIndex + index" :aria-expanded="moreIndex + index === navToggle" @click="toggleNav(moreIndex + index, true, $event)">
-                      <template v-if="moreIndex + index === navToggle">
-                        <icon-arrow-up/>
-                      </template>
-                      <template v-else>
-                        <icon-arrow-down/>
-                      </template>
-                    </button>
-                    <template v-if="moreIndex + index === navToggle">
-                      <ul v-if="nav_item.subnav" class="absolute -left-2 top-8 p-3 pt-2 bg-white shadow-md w-40" style="top: -0.75rem; left: -10rem; z-index: 11">
-                        <li v-for="(nav_item_sub, i) in nav_item.subnav">
-                          <nuxt-link :to="'/articles' + nav_item.link.url + nav_item_sub.link.url" :class="'nav-item-' + (moreIndex + index)">{{ nav_item_sub.name }}</nuxt-link>
-                        </li>
-                      </ul>
-                    </template>
+                    <NavSubmenu :index="(moreIndex + index)" :navItem="nav_item" styleProp="top: -0.75rem; left: -10rem; z-index: 11"/>
                   </li>
                 </template>
               </ul>
@@ -66,10 +38,11 @@
 </template>
 
 <script>
+import NavSubmenu from "@/components/layout/nav-helpers/NavSubmenu";
 import IconArrowDown from "@/components/icons/icon-arrow-down";
 import IconArrowUp from "@/components/icons/icon-arrow-up";
 export default {
-  components: {IconArrowUp, IconArrowDown},
+  components: {IconArrowUp, IconArrowDown,NavSubmenu},
   props: {
     nav: {
       type: Object,
