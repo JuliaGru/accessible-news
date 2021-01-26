@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       navToggle: -1,
-      moreItems: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+      moreItems: [],
       itemsLength: [],
       more: true,
       moreLength: 0,
