@@ -4,23 +4,23 @@
     <nav id="navigation" v-if="nav.story">
       <ul class="flex" ref="nav" >
         <template v-for="(nav_item, index) in nav.story.content.navigation">
-          <li v-bind:class="{ 'hidden' : moreItems[index]}" class="pl-4 py-1 flex items-center relative" ref="navitems">
+          <li v-bind:class="{ 'hidden' : $store.state.store.navMoreItems[index]}" class="pl-4 py-1 flex items-center relative" ref="navitems">
             <nuxt-link :class="'nav-item-' + index" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
             <NavButton :title="'Subnavigation ' + nav_item.name + ' öffnen'" :index="index" :ifCondition="index === navToggle"/>
             <NavSubmenu :index="index" :navItem="nav_item" styleProp="top: 2rem; left: -0.75rem;" :ifCondition="index === navToggle && nav_item.subnav !== undefined"/>
           </li>
         </template>
-        <template v-if="more">
+        <template v-if="$store.state.store.navMore">
           <li class="pl-4 py-1 flex items-center relative" ref="more">
-            <a :class="'nav-item-' + moreIndex" href="#">Mehr</a>
-            <NavButton title="Mehr Navigationselemente öffnen" :index="moreIndex" :ifCondition="moreIndex <=   navToggle"/>
-            <template v-if="moreIndex === navToggle || navToggle > moreIndex">
+            <a :class="'nav-item-' + $store.state.store.navMoreIndex" href="#">Mehr</a>
+            <NavButton title="Mehr Navigationselemente öffnen" :index="$store.state.store.navMoreIndex" :ifCondition="$store.state.store.navMoreIndex <=   navToggle"/>
+            <template v-if="$store.state.store.navMoreIndex === navToggle || navToggle > $store.state.store.navMoreIndex">
               <ul class="absolute -left-2 top-8 p-3 pt-2 bg-white shadow-md w-40" style="top: 2rem; left: auto; right: -0.75rem; text-align: right; z-index: 10">
                 <template v-for="(nav_item, index) in nav.story.content.navigation">
-                  <li class="w-full relative" v-if="moreItems[index]">
-                    <nuxt-link :class="'nav-item-' + moreIndex" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
-                    <NavButton :title="'Subnavigation ' + nav_item.name + ' öffnen'" :index="moreIndex + index" :class="'nav-item-' + moreIndex" :ifCondition="moreIndex + index === navToggle"/>
-                    <NavSubmenu :index="(moreIndex + index)" :navItem="nav_item" styleProp="top: -0.75rem; left: -10rem; z-index: 11" :ifCondition="(moreIndex + index) === navToggle && nav_item.subnav !== undefined"/>
+                  <li class="w-full relative" v-if="$store.state.store.navMoreItems[index]">
+                    <nuxt-link :class="'nav-item-' + $store.state.store.navMoreIndex" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
+                    <NavButton :title="'Subnavigation ' + nav_item.name + ' öffnen'" :index="$store.state.store.navMoreIndex + index" :class="'nav-item-' + $store.state.store.navMoreIndex" :ifCondition="$store.state.store.navMoreIndex + index === navToggle"/>
+                    <NavSubmenu :index="($store.state.store.navMoreIndex + index)" :navItem="nav_item" styleProp="top: -0.75rem; left: -10rem; z-index: 11" :ifCondition="($store.state.store.navMoreIndex + index) === navToggle && nav_item.subnav !== undefined"/>
                   </li>
                 </template>
               </ul>
@@ -50,31 +50,21 @@ export default {
   data() {
     return {
       navToggle: -1,
-      moreItems: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-      itemsLength: [],
-      more: true,
-      moreLength: 0,
-      moreIndex: 0,
     }
   },
   mounted() {
     document.addEventListener('focusin', this.focusChanged);
-    window.addEventListener('resize', this.shortMenu);
   },
   beforeDestroy() {
     document.removeEventListener('focusin', this.focusChanged);
-    window.removeEventListener('resize', this.shortMenu);
   },
   watch: {
     nav(newVal, oldVal) {
       this.$nextTick(function () {
-        let items = this.nav.story.content.navigation;
-        for (let i = 0; i < items.length; i++ ) {
-          this.itemsLength[i] = this.$refs.navitems[i].clientWidth;
-        }
-        this.moreLength = this.$refs.more.clientWidth;
-        this.shortMenu();
-        this.moreIndex = this.nav.story.content.navigation.length;
+        this.$store.commit('store/setNavRefMore', this.$refs.more);
+        this.$store.commit('store/setNavMoreIndex', this.nav.story.content.navigation.length);
+        this.$store.commit('store/setNavItemsLength', this.$refs.navitems);
+        this.$store.commit('store/shortMenu', this.width);
       })
     }
   },
@@ -89,35 +79,6 @@ export default {
         }
       }
     },
-    shortMenu() {
-      let items = this.nav.story.content.navigation;
-      let summary = 0;
-
-      let maxwidth = this.width - 30;
-
-      for (let i = 0; i < items.length; i++ ) {
-        summary += this.itemsLength[i];
-      }
-
-      if (summary > maxwidth) {
-        this.more = true;
-        summary += this.moreLength;
-
-        for (let i = items.length - 1; i >= 0; i--) {
-          if (summary > maxwidth) {
-            this.$set(this.moreItems, i, true)
-            this.moreItems[i] = true;
-          } else {
-            this.$set(this.moreItems, i, false)
-            this.moreItems[i] = false;
-          }
-
-          summary -= this.itemsLength[i];
-        }
-      }  else {
-        this.more = false;
-      }
-    }
   }
 }
 </script>

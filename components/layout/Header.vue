@@ -39,6 +39,7 @@ export default {
   methods: {
     resize() {
       this.maxWidth = this.$refs.maxwidth.clientWidth;
+      this.$store.commit('store/shortMenu', this.maxWidth);
     }
   },
   async fetch () {
