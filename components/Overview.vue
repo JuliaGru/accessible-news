@@ -4,8 +4,8 @@
     <SubNavigation :nav="navigation" v-if="!$route.params.subcategory"/>
     <div class="flex flex-wrap -mx-3">
       <div v-for="(article, index) in stories" :key="article._uid"
-        class="teaser w-full md:w-1/2 px-3 mb-6" >
-        <a aria-label="Artikel" href="#" tabindex="-1" :ref="'article-' + index"></a>
+        class="teaser w-full md:w-1/2 px-3 mb-6">
+        <a aria-label="Artikel" href="#" tabindex="-1" ref="article"></a>
         <article-teaser
           :article-link="'/' + article.full_slug"
           :article-content="article.content"/>
@@ -50,14 +50,14 @@ export default {
       if(event.key === 'j') {
         if(this.articleIndex < (this.stories.length - 1)) {
           this.articleIndex++;
+          this.$refs.article[this.articleIndex].focus();
         }
       } else if(event.key === 'k') {
         if(this.articleIndex > 0) {
           this.articleIndex--;
+          this.$refs.article[this.articleIndex].focus();
         }
       }
-
-      this.$refs["article-" + this.articleIndex][0].focus();
     },
   }
 }

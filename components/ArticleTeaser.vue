@@ -1,7 +1,6 @@
 <template>
     <div class="block p-6 border border-gray-500 h-full">
-      <nuxt-link
-        :to="articleLink">
+      <nuxt-link :to="articleLink">
         <h2 class="text-2xl font-bold pb-4" style="margin: 0">
             {{ articleContent.name }}
         </h2>
