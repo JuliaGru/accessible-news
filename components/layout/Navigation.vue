@@ -6,7 +6,7 @@
         <template v-for="(nav_item, index) in nav.story.content.navigation">
           <li v-bind:class="{ 'hidden' : moreItems[index]}" class="pl-4 py-1 flex items-center relative" ref="navitems">
             <nuxt-link :class="'nav-item-' + index" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
-            <NavSubmenu :index="index" :navItem="nav_item" styleProp="display: none; top: 1.5rem; left: -0.75rem; padding-top: 1rem; z-index: -1;" :ifCondition="nav_item.subnav"/>
+            <NavSubmenu :index="index" :navItem="nav_item" styleProp="display: none; top: 1.5rem; left: -0.75rem; padding-top: 1rem; z-index: -1;" :ifCondition="nav_item.subnav !== undefined"/>
           </li>
         </template>
         <template v-if="more">
@@ -24,7 +24,7 @@
               <template v-for="(nav_item, index) in nav.story.content.navigation">
                 <li class="w-full relative" v-if="moreItems[index]">
                   <nuxt-link :class="'nav-item-' + moreIndex" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
-                  <NavSubmenu :index="(moreIndex + index)" :navItem="nav_item" styleProp="display: none; top: -0.75rem; left: -10rem; z-index: -1;" :ifCondition="nav_item.subnav"/>
+                  <NavSubmenu :index="(moreIndex + index)" :navItem="nav_item" styleProp="display: none; top: -0.75rem; left: -10rem; z-index: -1;" :ifCondition="nav_item.subnav !== undefined"/>
                 </li>
               </template>
             </ul>

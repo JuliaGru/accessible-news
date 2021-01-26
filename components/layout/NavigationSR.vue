@@ -7,7 +7,7 @@
           <li v-bind:class="{ 'hidden' : moreItems[index]}" class="pl-4 py-1 flex items-center relative" ref="navitems">
             <nuxt-link :class="'nav-item-' + index" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
             <NavButton :title="'Subnavigation ' + nav_item.name + ' öffnen'" :index="index" :ifCondition="index === navToggle"/>
-            <NavSubmenu :index="index" :navItem="nav_item" styleProp="top: 2rem; left: -0.75rem;" :ifCondition="index === navToggle && nav_item.subnav"/>
+            <NavSubmenu :index="index" :navItem="nav_item" styleProp="top: 2rem; left: -0.75rem;" :ifCondition="index === navToggle && nav_item.subnav !== undefined"/>
           </li>
         </template>
         <template v-if="more">
@@ -20,7 +20,7 @@
                   <li class="w-full relative" v-if="moreItems[index]">
                     <nuxt-link :class="'nav-item-' + moreIndex" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
                     <NavButton :title="'Subnavigation ' + nav_item.name + ' öffnen'" :index="moreIndex + index" :class="'nav-item-' + moreIndex" :ifCondition="moreIndex + index === navToggle"/>
-                    <NavSubmenu :index="(moreIndex + index)" :navItem="nav_item" styleProp="top: -0.75rem; left: -10rem; z-index: 11" :ifCondition="(moreIndex + index) === navToggle && nav_item.subnav"/>
+                    <NavSubmenu :index="(moreIndex + index)" :navItem="nav_item" styleProp="top: -0.75rem; left: -10rem; z-index: 11" :ifCondition="(moreIndex + index) === navToggle && nav_item.subnav !== undefined"/>
                   </li>
                 </template>
               </ul>

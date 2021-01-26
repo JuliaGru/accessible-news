@@ -3,8 +3,7 @@
     <h1>{{ category }}</h1>
     <SubNavigation :nav="navigation" v-if="!$route.params.subcategory"/>
     <div class="flex flex-wrap -mx-3">
-      <div
-        v-for="(article, index) in stories" :key="article._uid"
+      <div v-for="(article, index) in stories" :key="article._uid"
         class="teaser w-full md:w-1/2 px-3 mb-6" >
         <a aria-label="Artikel" href="#" tabindex="-1" :ref="'article-' + index"></a>
         <article-teaser
