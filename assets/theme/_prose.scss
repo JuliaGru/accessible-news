@@ -1,10 +1,38 @@
 .prose {
   max-width: 800px;
+  min-height: calc(100vh - 16rem);
 
   h1, h2, h3 {
     color: var( --theme-color-dark );
     @apply font-bold;
   }
+
+  h1 {
+    @apply text-3xl;
+  }
+
+  h2 {
+    @apply text-xl;
+  }
+
+  h3 {
+    @apply text-lg;
+  }
+
+  @screen md {
+    h1 {
+      @apply text-4xl;
+    }
+
+    h2 {
+      @apply text-2xl;
+    }
+
+    h3 {
+      @apply text-xl;
+    }
+  }
+
 
   #subNavigation {
     ul {
@@ -22,6 +50,17 @@
 
   .img {
     @apply mt-0 mb-2;
+  }
+
+  .teaser-image {
+    width: 100%;
+    padding-top: 56.25%;
+    overflow: hidden;
+    height: 0;
+
+    img {
+      @apply mb-0;
+    }
   }
 }
 
