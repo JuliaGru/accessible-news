@@ -33,6 +33,10 @@
     }
   }
 
+  ul > li:before {
+    background: var( --theme-color );
+  }
+
 
   #subNavigation {
     ul {
