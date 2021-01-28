@@ -13,12 +13,7 @@
           <li class="pl-4 py-1 flex items-center relative" ref="more">
             <a :class="'nav-item-' + $store.state.store.navMoreIndex" class="flex items-center" href="#">
               <span class="mr-1">Mehr</span>
-              <template v-if="$store.state.store.navMoreIndex <= navToggle">
-                <icon-arrow-up/>
-              </template>
-              <template v-else>
-                <icon-arrow-down/>
-              </template>
+              <icon-arrow-down/>
             </a>
             <ul class="hidden absolute -left-2 top-8 p-3 pt-2 bg-white shadow-md w-40" style="top: 1.4rem; left: auto; right: -0.75rem; text-align: right; z-index: -1; padding-top: 1.1rem;">
               <template v-for="(nav_item, index) in nav.story.content.navigation">
@@ -57,17 +52,6 @@ export default {
       return: true
     }
   },
-  data() {
-    return {
-      navToggle: -1,
-    }
-  },
-  mounted() {
-    document.addEventListener('focusin', this.focusChanged);
-  },
-  beforeDestroy() {
-    document.removeEventListener('focusin', this.focusChanged);
-  },
   watch: {
     nav(newVal, oldVal) {
       this.$nextTick(function () {
@@ -78,17 +62,5 @@ export default {
       })
     }
   },
-  methods: {
-    focusChanged (event) {
-      if (this.navToggle !== -1 && !event.target.classList.contains('nav-item-' + this.navToggle)) {
-        //check if index is within more navigation && if it is the last element
-        if (this.navToggle > this.moreIndex && this.navToggle !== this.moreIndex + this.nav.story.content.navigation.length - 1) {
-          this.navToggle = this.moreIndex;
-        } else {
-          this.navToggle = -1;
-        }
-      }
-    },
-  }
 }
 </script>

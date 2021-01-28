@@ -38,8 +38,8 @@ export default {
       event.stopPropagation();
       if (id === this.$parent.navToggle) {
         //check if index is within more navigation && if it is the last element
-        if (this.$parent.navToggle > this.$parent.moreIndex) {
-          this.$parent.navToggle = this.$parent.moreIndex;
+        if (this.$parent.navToggle > this.$store.state.store.navMoreIndex) {
+          this.$parent.navToggle = this.$store.state.store.navMoreIndex;
         } else {
           this.$parent.navToggle = -1;
         }
