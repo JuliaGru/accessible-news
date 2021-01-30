@@ -39,9 +39,8 @@ li:hover > ul {
 <script>
 import NavSubmenu from "@/components/layout/nav-helpers/NavSubmenu";
 import IconArrowDown from "@/components/icons/icon-arrow-down";
-import IconArrowUp from "@/components/icons/icon-arrow-up";
 export default {
-  components: {IconArrowUp, IconArrowDown,NavSubmenu},
+  components: {IconArrowDown,NavSubmenu},
   props: {
     nav: {
       type: Object,

@@ -23,9 +23,11 @@ export default {
     }
   },
   asyncData (context) {
+    let version = context.query._storyblok || context.isDev ? 'draft' : 'published';
+
     return context.app.$storyapi.get('cdn/stories', {
       starts_with: 'articles/' + context.params.category + '/',
-      version: 'published'
+      version: version
     }).then((res) => {
       return res.data
     }).catch((res) => {
