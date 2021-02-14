@@ -1,5 +1,5 @@
 <template>
-  <button :class="classList" class="ml-1" :title="title" :data-toggle="'toggle-' + index" :aria-expanded="index === $parent.navToggle" @click="toggleNav(index, true, $event)">
+  <button :class="classList" class="ml-1" :title="title" :data-toggle="'toggle-' + index" :aria-expanded="index === $parent.navToggle" @click="toggleNav(index, $event)">
     <template v-if="ifCondition">
       <icon-arrow-up/>
     </template>
@@ -34,7 +34,7 @@ export default {
     }
   },
   methods: {
-    toggleNav(id, out, event) {
+    toggleNav(id, event) {
       event.stopPropagation();
       if (id === this.$parent.navToggle) {
         //check if index is within more navigation && if it is the last element

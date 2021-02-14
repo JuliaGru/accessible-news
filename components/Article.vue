@@ -1,6 +1,5 @@
 <template>
-  <div
-    v-editable="blok">
+  <div>
     <template v-if="!$store.state.store.screenReader">
       <span class="uppercase text-gray-500">{{ blok.tag }}</span>
     </template>

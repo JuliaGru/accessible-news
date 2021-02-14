@@ -4,7 +4,7 @@
 
       <template v-if="articleContent.image.id !== null">
         <nuxt-link :to="articleLink" :title="articleContent.name">
-          <div class="teaser-image flex justify-center items-end mb-3">
+          <div class="teaser-image flex justify-center items-end">
             <img :src="articleContent.image.filename" :alt="articleContent.image.alt" :title="articleContent.image.title" class="img w-full" width="500" />
           </div>
         </nuxt-link>

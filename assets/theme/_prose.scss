@@ -57,13 +57,24 @@
   }
 
   .teaser-image {
-    width: 100%;
     padding-top: 56.25%;
     overflow: hidden;
-    height: 0;
+
+    @apply h-0 w-full relative;
 
     img {
       @apply mb-0;
+    }
+  }
+
+  .youtube-container {
+    padding-top: 56.25%;
+    overflow: hidden;
+
+    @apply h-0 w-full relative;
+
+    .youtube {
+      @apply mb-0 absolute top-0 left-0 w-full h-full;
     }
   }
 }
