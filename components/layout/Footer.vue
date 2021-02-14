@@ -36,8 +36,8 @@ export default {
 
       this.$nextTick(function () {
         console.log(this.$parent);
-        this.$store.commit('store/setNavItemsLength', this.$parent.$children[4].$children[1].$refs.navitems); //get to navigation
-        this.$store.commit('store/shortMenu', this.$parent.$children[4].$refs.maxwidth.clientWidth);
+        this.$store.commit('store/setNavItemsLength', this.$parent.$children[3].$children[1].$refs.navitems); //get to navigation
+        this.$store.commit('store/shortMenu', this.$parent.$children[3].$refs.maxwidth.clientWidth);
       })
     }
   }
