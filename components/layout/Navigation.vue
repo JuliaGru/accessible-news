@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!$store.state.store.screenReader">
     <a aria-label="Navigation" id="skiplink_navigation" href="#" tabindex="-1"></a>
     <nav id="navigation" v-if="nav.story">
       <ul class="flex" ref="nav" >
