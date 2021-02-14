@@ -1,5 +1,5 @@
 <template>
-  <div v-if="$store.state.store.screenReader">
+  <div>
     <a aria-label="Navigation" id="skiplink_navigation" href="#" tabindex="-1"></a>
     <nav id="navigation" v-if="nav.story">
       <ul class="flex" ref="nav" >
@@ -37,9 +37,14 @@ import NavButton from "@/components/layout/nav-helpers/NavButton";
 import NavSubmenu from "@/components/layout/nav-helpers/NavSubmenu";
 export default {
   components: {NavSubmenu, NavButton},
-  computed: {
-    nav () {
-      return this.$store.state.store.navigation;
+  props: {
+    nav: {
+      type: Object,
+      required: true
+    },
+    width: {
+      type: Number,
+      return: true
     }
   },
   data() {
@@ -52,6 +57,16 @@ export default {
   },
   beforeDestroy() {
     document.removeEventListener('focusin', this.focusChanged);
+  },
+  watch: {
+    nav(newVal, oldVal) {
+      this.$nextTick(function () {
+        this.$store.commit('store/setNavRefMore', this.$refs.more);
+        this.$store.commit('store/setNavMoreIndex', this.nav.story.content.navigation.length);
+        this.$store.commit('store/setNavItemsLength', this.$refs.navitems);
+        this.$store.commit('store/shortMenu', this.width);
+      })
+    }
   },
   methods: {
     focusChanged (event) {

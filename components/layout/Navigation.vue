@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!$store.state.store.screenReader">
+  <div>
     <a aria-label="Navigation" id="skiplink_navigation" href="#" tabindex="-1"></a>
     <nav id="navigation" v-if="nav.story">
       <ul class="flex" ref="nav" >
@@ -41,9 +41,24 @@ import NavSubmenu from "@/components/layout/nav-helpers/NavSubmenu";
 import IconArrowDown from "@/components/icons/icon-arrow-down";
 export default {
   components: {IconArrowDown,NavSubmenu},
-  computed: {
-    nav () {
-      return this.$store.state.store.navigation;
+  props: {
+    nav: {
+      type: Object,
+      required: true
+    },
+    width: {
+      type: Number,
+      return: true
+    }
+  },
+  watch: {
+    nav() {
+      this.$nextTick(function () {
+        this.$store.commit('store/setNavRefMore', this.$refs.more);
+        this.$store.commit('store/setNavMoreIndex', this.nav.story.content.navigation.length);
+        this.$store.commit('store/setNavItemsLength', this.$refs.navitems);
+        this.$store.commit('store/shortMenu', this.width);
+      })
     }
   },
 }

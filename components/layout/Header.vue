@@ -4,8 +4,12 @@
       <nuxt-link to="/" title="Zur Startseite" class="home">
         <icon-home/>
       </nuxt-link>
-      <NavigationSR ref="navSR"/>
-      <Navigation ref="nav"/>
+      <template v-if="$store.state.store.screenReader">
+        <NavigationSR :nav="navigation" :width="maxWidth"/>
+      </template>
+      <template v-else>
+        <Navigation :nav="navigation" :width="maxWidth"/>
+      </template>
     </div>
   </header>
 </template>
@@ -13,7 +17,6 @@
 import IconHome from "@/components/icons/icon-home";
 import Navigation from "@/components/layout/Navigation";
 import NavigationSR from "@/components/layout/NavigationSR";
-
 export default {
   components: {
     NavigationSR,
@@ -22,22 +25,13 @@ export default {
   },
   data() {
     return {
+      navigation: {},
       maxWidth: 1024,
     }
   },
   mounted() {
     this.maxWidth = this.$refs.maxwidth.clientWidth;
     window.addEventListener('resize', this.resize);
-
-    let ref = "navSR";
-    if (!this.$store.state.store.screenReader) {
-      ref = "nav";
-    }
-
-    this.$store.commit('store/setNavRefMore', this.$refs[ref].$refs.more);
-    this.$store.commit('store/setNavMoreIndex', this.$store.state.store.navigation.story.content.navigation.length);
-    this.$store.commit('store/setNavItemsLength', this.$refs[ref].$refs.navitems);
-    this.$store.commit('store/shortMenu', this.maxWidth);
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.resize);
@@ -50,7 +44,7 @@ export default {
   },
   async fetch () {
     let preview_token = 'AZg8k4iwgfML7XgBWjtsUQtt';
-    this.$store.commit('store/setNavigation', await this.$axios.$get(`https://api.storyblok.com/v1/cdn/stories/navigation/navigation-main/?token=${preview_token}&version=draft`));
+    this.navigation = await this.$axios.$get(`https://api.storyblok.com/v1/cdn/stories/navigation/navigation-main/?token=${preview_token}&version=draft`)
   },
 }
 </script>
