@@ -31,7 +31,6 @@ export default {
     '~/plugins/components',
     '~/plugins/composition-api.js',
     '~/plugins/storyblok-rich-text-renderer.js',
-    { src: "~/plugins/vue-announcer.js", mode: "client" }
   ],
   /*
   ** Nuxt.js dev-modules
