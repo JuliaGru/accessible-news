@@ -1,6 +1,6 @@
 <template>
   <div :class="$store.state.store.theme">
-    <client-only>
+    <client-only slot="placeholder">
       <VueAnnouncer />
     </client-only>
     <ScreenReader/>
