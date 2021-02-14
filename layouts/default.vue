@@ -1,6 +1,6 @@
 <template>
   <div :class="$store.state.store.theme">
-    
+    <SkipLinks />
   </div>
 </template>
 
