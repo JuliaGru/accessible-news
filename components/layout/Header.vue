@@ -4,7 +4,7 @@
       <nuxt-link to="/" title="Zur Startseite" class="home">
         <icon-home/>
       </nuxt-link>
-      <Navigation :width="maxWidth"/>
+      <Navigation ref="nav"/>
     </div>
   </header>
 </template>
@@ -27,6 +27,11 @@ export default {
   mounted() {
     this.maxWidth = this.$refs.maxwidth.clientWidth;
     window.addEventListener('resize', this.resize);
+
+    this.$store.commit('store/setNavRefMore', this.$refs.nav.$refs.more);
+    this.$store.commit('store/setNavMoreIndex', this.$store.state.store.navigation.story.content.navigation.length);
+    this.$store.commit('store/setNavItemsLength', this.$refs.nav.$refs.navitems);
+    this.$store.commit('store/shortMenu', this.maxWidth);
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.resize);

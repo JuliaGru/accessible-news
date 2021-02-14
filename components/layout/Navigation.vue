@@ -41,31 +41,9 @@ import NavSubmenu from "@/components/layout/nav-helpers/NavSubmenu";
 import IconArrowDown from "@/components/icons/icon-arrow-down";
 export default {
   components: {IconArrowDown,NavSubmenu},
-  props: {
-    width: {
-      type: Number,
-      return: true
-    }
-  },
   computed: {
     nav () {
       return this.$store.state.store.navigation;
-    }
-  },
-  watch: {
-    nav() {
-      console.log("-");
-      this.$nextTick(function () {
-        console.log("-");
-        console.log(this.$refs.more);
-        console.log(this.nav.story.content.navigation.length);
-        console.log(this.$refs.navitems);
-        console.log(this.width);
-        this.$store.commit('store/setNavRefMore', this.$refs.more);
-        this.$store.commit('store/setNavMoreIndex', this.nav.story.content.navigation.length);
-        this.$store.commit('store/setNavItemsLength', this.$refs.navitems);
-        this.$store.commit('store/shortMenu', this.width);
-      })
     }
   },
 }
