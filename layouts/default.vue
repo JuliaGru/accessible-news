@@ -1,15 +1,6 @@
 <template>
   <div :class="$store.state.store.theme">
-    <VueAnnouncer />
-    <ScreenReader/>
-    <a aria-label="Skip Links" id="skiplink" ref="skiplink" href="#" tabindex="-1"></a>
-    <SkipLinks />
-    <Header />
-    <a aria-label="Inhalt" id="skiplink_content" href="#" tabindex="-1" ref="content"></a>
-    <div id="content" class="prose mx-auto px-6 py-3">
-      <Nuxt />
-    </div>
-    <Footer/>
+    
   </div>
 </template>
 
