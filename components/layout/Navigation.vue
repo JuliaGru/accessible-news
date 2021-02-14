@@ -52,7 +52,8 @@ export default {
     }
   },
   watch: {
-    nav(newVal, oldVal) {
+    nav() {
+      console.log("-");
       this.$nextTick(function () {
         console.log("-");
         console.log(this.$refs.more);
