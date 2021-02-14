@@ -4,12 +4,6 @@
       <nuxt-link to="/" title="Zur Startseite" class="home">
         <icon-home/>
       </nuxt-link>
-      <template v-if="$store.state.store.screenReader">
-        <NavigationSR :nav="navigation" :width="maxWidth"/>
-      </template>
-      <template v-else>
-        <Navigation :nav="navigation" :width="maxWidth"/>
-      </template>
     </div>
   </header>
 </template>
