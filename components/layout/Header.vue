@@ -4,7 +4,7 @@
       <nuxt-link to="/" title="Zur Startseite" class="home">
         <icon-home/>
       </nuxt-link>
-      <Navigation :nav="navigation" :width="maxWidth"/>
+      <Navigation :width="maxWidth"/>
     </div>
   </header>
 </template>
@@ -21,7 +21,6 @@ export default {
   },
   data() {
     return {
-      navigation: {},
       maxWidth: 1024,
     }
   },
@@ -40,7 +39,7 @@ export default {
   },
   async fetch () {
     let preview_token = 'AZg8k4iwgfML7XgBWjtsUQtt';
-    this.navigation = await this.$axios.$get(`https://api.storyblok.com/v1/cdn/stories/navigation/navigation-main/?token=${preview_token}&version=draft`)
+    this.$store.commit('store/setNavigation', await this.$axios.$get(`https://api.storyblok.com/v1/cdn/stories/navigation/navigation-main/?token=${preview_token}&version=draft`));
   },
 }
 </script>

@@ -42,13 +42,14 @@ import IconArrowDown from "@/components/icons/icon-arrow-down";
 export default {
   components: {IconArrowDown,NavSubmenu},
   props: {
-    nav: {
-      type: Object,
-      required: true
-    },
     width: {
       type: Number,
       return: true
+    }
+  },
+  computed: {
+    nav () {
+      return this.$store.state.store.navigation;
     }
   },
   watch: {

@@ -1,6 +1,7 @@
 export const state = () => ({
   screenReader: false,
   theme: 'theme-default',
+  navigation: null,
   navMore: true,
   navMoreLength: 0,
   navMoreItems: [],
@@ -14,6 +15,9 @@ export const mutations = {
   },
   setTheme(state, theme) {
     state.theme = theme;
+  },
+  setNavigation(state, navigation) {
+    state.navigation = navigation;
   },
   setNavRefMore(state, refMore) {
     state.navMoreLength = refMore.clientWidth;
