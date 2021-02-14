@@ -37,14 +37,9 @@ import NavButton from "@/components/layout/nav-helpers/NavButton";
 import NavSubmenu from "@/components/layout/nav-helpers/NavSubmenu";
 export default {
   components: {NavSubmenu, NavButton},
-  props: {
-    nav: {
-      type: Object,
-      required: true
-    },
-    width: {
-      type: Number,
-      return: true
+  computed: {
+    nav () {
+      return this.$store.state.store.navigation;
     }
   },
   data() {
@@ -57,16 +52,6 @@ export default {
   },
   beforeDestroy() {
     document.removeEventListener('focusin', this.focusChanged);
-  },
-  watch: {
-    nav(newVal, oldVal) {
-      this.$nextTick(function () {
-        this.$store.commit('store/setNavRefMore', this.$refs.more);
-        this.$store.commit('store/setNavMoreIndex', this.nav.story.content.navigation.length);
-        this.$store.commit('store/setNavItemsLength', this.$refs.navitems);
-        this.$store.commit('store/shortMenu', this.width);
-      })
-    }
   },
   methods: {
     focusChanged (event) {

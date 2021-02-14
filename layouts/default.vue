@@ -3,8 +3,13 @@
     <VueAnnouncer />
     <ScreenReader/>
     <a aria-label="Skip Links" id="skiplink" ref="skiplink" href="#" tabindex="-1"></a>
-    <SkipLinks />
-    <Header />
+    <SkipLinks/>
+    <Header/>
+    <a aria-label="Inhalt" id="skiplink_content" href="#" tabindex="-1"></a>
+    <div id="content" class="prose mx-auto px-6 py-3" ref="content">
+        <Nuxt/>
+    </div>
+    <Footer/>
   </div>
 </template>
 
@@ -29,7 +34,6 @@ export default {
   },
   watch: {
     $route() {
-      console.log("-route-");
       if($nuxt.$route.hash === "") {
         this.$refs["content"].focus();
       }

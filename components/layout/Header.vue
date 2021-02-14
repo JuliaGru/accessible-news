@@ -4,7 +4,8 @@
       <nuxt-link to="/" title="Zur Startseite" class="home">
         <icon-home/>
       </nuxt-link>
-      <Navigation ref="nav"/>
+      <NavigationSR ref="nav" v-if="$store.state.store.screenReader"/>
+      <Navigation ref="nav" v-else/>
     </div>
   </header>
 </template>
