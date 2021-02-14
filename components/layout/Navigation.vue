@@ -54,6 +54,11 @@ export default {
   watch: {
     nav(newVal, oldVal) {
       this.$nextTick(function () {
+        console.log("-");
+        console.log(this.$refs.more);
+        console.log(this.nav.story.content.navigation.length);
+        console.log(this.$refs.navitems);
+        console.log(this.width);
         this.$store.commit('store/setNavRefMore', this.$refs.more);
         this.$store.commit('store/setNavMoreIndex', this.nav.story.content.navigation.length);
         this.$store.commit('store/setNavItemsLength', this.$refs.navitems);
