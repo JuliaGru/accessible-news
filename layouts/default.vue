@@ -1,8 +1,6 @@
 <template>
   <div :class="$store.state.store.theme">
-    <client-only slot="placeholder">
-      <VueAnnouncer />
-    </client-only>
+    <VueAnnouncer />
     <ScreenReader/>
     <a aria-label="Skip Links" id="skiplink" ref="skiplink" href="#" tabindex="-1"></a>
     <SkipLinks />
