@@ -4,6 +4,9 @@
   "description": "",
   "author": "Julia Gruber",
   "private": true,
+  "engines": {
+    "yarn": "1.22.10"
+  },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
