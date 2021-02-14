@@ -3,9 +3,6 @@
     <SkipLinks/>
     <Header/>
     <a aria-label="Inhalt" id="skiplink_content" href="#" tabindex="-1" ref="content"></a>
-    <div id="content" class="prose mx-auto px-6 py-3">
-      <Nuxt/>
-    </div>
   </div>
 </template>
 
