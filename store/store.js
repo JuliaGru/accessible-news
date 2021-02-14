@@ -39,6 +39,7 @@ export const mutations = {
       summary += state.navItemsLength[i];
     }
 
+    console.log(summary + " - " + maxwidth);
     if (summary > maxwidth) {
       state.navMore = true;
       summary += state.navMoreLength;
