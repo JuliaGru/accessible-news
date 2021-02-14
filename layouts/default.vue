@@ -29,6 +29,7 @@ export default {
   },
   watch: {
     $route() {
+      console.log("-route-");
       if($nuxt.$route.hash === "") {
         this.$refs["content"].focus();
       }
