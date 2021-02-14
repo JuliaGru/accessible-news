@@ -4,7 +4,7 @@
       <nuxt-link to="/" title="Zur Startseite" class="home">
         <icon-home/>
       </nuxt-link>
-      <NavigationSR ref="nav"/>
+      <NavigationSR ref="navSR"/>
       <Navigation ref="nav"/>
     </div>
   </header>
@@ -29,9 +29,14 @@ export default {
     this.maxWidth = this.$refs.maxwidth.clientWidth;
     window.addEventListener('resize', this.resize);
 
-    this.$store.commit('store/setNavRefMore', this.$refs.nav.$refs.more);
+    let ref = "navSR";
+    if (!this.$store.state.store.screenReader) {
+      ref = "nav";
+    }
+
+    this.$store.commit('store/setNavRefMore', this.$refs[ref].$refs.more);
     this.$store.commit('store/setNavMoreIndex', this.$store.state.store.navigation.story.content.navigation.length);
-    this.$store.commit('store/setNavItemsLength', this.$refs.nav.$refs.navitems);
+    this.$store.commit('store/setNavItemsLength', this.$refs[ref].$refs.navitems);
     this.$store.commit('store/shortMenu', this.maxWidth);
   },
   beforeDestroy() {
