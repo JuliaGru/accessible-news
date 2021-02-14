@@ -4,8 +4,7 @@
       <nuxt-link to="/" title="Zur Startseite" class="home">
         <icon-home/>
       </nuxt-link>
-      <NavigationSR :nav="navigation" :width="maxWidth" v-if="$store.state.store.screenReader"/>
-      <Navigation :nav="navigation" :width="maxWidth" v-if="!$store.state.store.screenReader"/>
+      <Navigation :nav="navigation" :width="maxWidth"/>
     </div>
   </header>
 </template>
@@ -13,6 +12,7 @@
 import IconHome from "@/components/icons/icon-home";
 import Navigation from "@/components/layout/Navigation";
 import NavigationSR from "@/components/layout/NavigationSR";
+
 export default {
   components: {
     NavigationSR,
