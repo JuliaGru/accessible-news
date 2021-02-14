@@ -6,7 +6,6 @@
     <div id="content" class="prose mx-auto px-6 py-3">
       <Nuxt/>
     </div>
-    <Footer/>
   </div>
 </template>
 
