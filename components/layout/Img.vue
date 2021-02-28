@@ -1,11 +1,10 @@
 <template>
   <div class="my-8">
     <template v-if="$store.state.store.screenReader">
-      <div class="bg-var-light py-4 px-5">
-        <span class="block font-bold">Bild: {{ alt }}</span>
+      <section :aria-label="'Bild ' + alt" class="bg-var-light py-4 px-5">
         <span class="block">Bild-Titel: {{ title }}</span>
         <span class="block text-sm">© {{ copyright }}</span>
-      </div>
+      </section>
     </template>
     <template v-else>
       <img :src="source" :alt="alt" :title="title" class="img mb-2" width="800">

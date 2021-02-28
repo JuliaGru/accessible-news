@@ -5,7 +5,7 @@
       <ul class="flex" ref="nav" >
         <template v-for="(nav_item, index) in nav.story.content.navigation">
           <li v-bind:class="{ 'hidden' : $store.state.store.navMoreItems[index]}" class="pl-4 py-1 flex items-center relative" ref="navitems">
-            <nuxt-link :class="'nav-item-' + index" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
+            <nuxt-link :class="'nav-item-' + index" :to="'/articles' + nav_item.link.url" :title="nav_item.name">{{ nav_item.name }}</nuxt-link>
             <NavButton :title="'Subnavigation ' + nav_item.name + ' öffnen'" :index="index" :ifCondition="index === navToggle"/>
             <NavSubmenu :index="index" :navItem="nav_item" styleProp="top: 2rem; left: -0.75rem;" :ifCondition="index === navToggle && nav_item.subnav !== undefined"/>
           </li>
@@ -18,7 +18,7 @@
               <ul class="absolute -left-2 top-8 p-3 pt-2 bg-white shadow-md w-40" style="top: 2rem; left: auto; right: -0.75rem; text-align: right; z-index: 10">
                 <template v-for="(nav_item, index) in nav.story.content.navigation">
                   <li class="w-full relative" v-if="$store.state.store.navMoreItems[index]">
-                    <nuxt-link :class="'nav-item-' + $store.state.store.navMoreIndex" :to="'/articles' + nav_item.link.url" >{{ nav_item.name }}</nuxt-link>
+                    <nuxt-link :class="'nav-item-' + $store.state.store.navMoreIndex" :to="'/articles' + nav_item.link.url" :title="nav_item.name">{{ nav_item.name }}</nuxt-link>
                     <NavButton :title="'Subnavigation ' + nav_item.name + ' öffnen'" :index="($store.state.store.navMoreIndex + index)" :class="'nav-item-' + $store.state.store.navMoreIndex" :ifCondition="($store.state.store.navMoreIndex + index) === navToggle"/>
                     <NavSubmenu :index="($store.state.store.navMoreIndex + index)" :navItem="nav_item" styleProp="top: -0.75rem; left: -10rem; z-index: 11" :ifCondition="($store.state.store.navMoreIndex + index) === navToggle && nav_item.subnav !== undefined"/>
                   </li>

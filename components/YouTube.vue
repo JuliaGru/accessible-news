@@ -1,11 +1,9 @@
 <template>
   <div class="my-8">
     <template v-if="$store.state.store.screenReader">
-      <div class="bg-var-light py-4 px-5">
-        <span class="block font-bold">YouTube-Video</span>
-        <span class="block">Titel: {{ blok.title }}</span>
+      <section :aria-label="'Youtube Video:' + blok.title" class="bg-var-light py-4 px-5">
         <div>Beschreibung: {{ blok.description }}</div>
-      </div>
+      </section>
     </template>
     <template v-else>
       <div class="youtube-container flex justify-center items-end mb-3">

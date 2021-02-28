@@ -17,7 +17,7 @@
     </template>
 
 
-    <nuxt-link :to="articleLink">
+    <nuxt-link :to="articleLink" :title="'Artikel: ' + articleContent.name">
       <h2 class="font-bold pb-4" style="margin: 0">
         {{ articleContent.name }}
       </h2>
@@ -29,9 +29,8 @@
       {{ articleContent.teaser }}
     </p>
     <template v-if="$store.state.store.screenReader">
-      <nuxt-link :to="articleLink" class="inline-block mt-2">Zum Artikel</nuxt-link>
+      <nuxt-link :to="articleLink" class="inline-block mt-2" :title="'Zum Artikel ' + articleContent.name">Zum Artikel</nuxt-link>
     </template>
-
   </div>
 </template>
 
