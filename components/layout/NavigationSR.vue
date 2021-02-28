@@ -12,7 +12,7 @@
         </template>
         <template v-if="$store.state.store.navMore">
           <li class="pl-4 py-1 flex items-center relative" ref="more">
-            <a :class="'nav-item-' + $store.state.store.navMoreIndex" href="#">Mehr</a>
+            <span :class="'nav-item-' + $store.state.store.navMoreIndex">Mehr</span>
             <NavButton title="Mehr Navigationselemente öffnen" :index="$store.state.store.navMoreIndex" :ifCondition="$store.state.store.navMoreIndex <= navToggle"/>
             <template v-if="$store.state.store.navMoreIndex === navToggle || navToggle > $store.state.store.navMoreIndex">
               <ul class="absolute -left-2 top-8 p-3 pt-2 bg-white shadow-md w-40" style="top: 2rem; left: auto; right: -0.75rem; text-align: right; z-index: 10">

@@ -8,8 +8,11 @@
             <li class="mr-3">
               <nuxt-link to="/impressum">Impressum</nuxt-link>
             </li>
-            <li>
+            <li  class="mr-3">
               <nuxt-link to="/datenschutz">Datenschutz</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/hilfe">Hilfe</nuxt-link>
             </li>
           </ul>
         </nav>
