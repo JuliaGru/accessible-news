@@ -18,7 +18,10 @@
 
 
     <nuxt-link :to="articleLink" :title="'Artikel: ' + articleContent.name">
-      <h2 class="font-bold pb-4" style="margin: 0">
+      <h3 v-if="ishomepage" class="font-bold pb-4" style="margin: 0">
+        {{ articleContent.name }}
+      </h3>
+      <h2 v-else class="font-bold pb-4" style="margin: 0">
         {{ articleContent.name }}
       </h2>
     </nuxt-link>
@@ -45,13 +48,11 @@ export default {
     articleLink: {
       type: String,
       required: true
+    },
+    ishomepage: {
+      type: Boolean,
+      required: false,
     }
   }
 }
 </script>
-
-<style>
-.article-teaser:hover {
-  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.75);
-}
-</style>
