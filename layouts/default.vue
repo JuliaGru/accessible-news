@@ -1,20 +1,14 @@
 <template>
   <div :class="$store.state.store.theme">
-    <client-only>
       <ScreenReader/>
-    </client-only>
     <a aria-label="Skip Links" id="skiplink" ref="skiplink" href="#" tabindex="-1"></a>
     <SkipLinks/>
-    <client-only>
       <Header/>
-    </client-only>
     <a aria-label="Inhalt" id="skiplink_content" href="#" tabindex="-1"></a>
     <div id="content" class="prose mx-auto px-6 py-3" ref="content">
         <Nuxt/>
     </div>
-    <client-only>
       <Footer/>
-    </client-only>
   </div>
 </template>
 
