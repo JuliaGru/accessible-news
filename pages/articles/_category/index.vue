@@ -1,5 +1,8 @@
 <template>
   <section>
+    <client-only>
+      <Overview :stories="stories" :category="category"/>
+    </client-only>
   </section>
 </template>
 
