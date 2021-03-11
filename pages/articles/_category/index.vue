@@ -1,6 +1,5 @@
 <template>
   <section>
-    <Overview :stories="stories" :category="category"/>
   </section>
 </template>
 
