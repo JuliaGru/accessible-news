@@ -33,7 +33,7 @@ export default {
     changeScreenReader: function (sr, text) {
       this.$store.commit('store/setReader', sr)
       localStorage.setItem('sr', sr);
-      //this.$announcer.assertive(text);
+      this.$announcer.assertive(text);
 
       this.$store.commit('store/setNavMore', false);
 
