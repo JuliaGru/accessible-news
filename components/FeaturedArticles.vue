@@ -2,13 +2,15 @@
   <section :aria-label="ariaLabel" class="mt-12" :class="'theme-' + blok.navslug">
     <SubNavigation v-if="blok.hasnav" :nav="navigation" :title="blok.title" :route="blok.navslug"/>
     <div class="flex flex-wrap -mx-3">
-      <article v-for="(article, index) in sortedArticles" :key="article._uid" :aria-label="article.content.name"
-               class="teaser w-full md:w-1/2 px-3 mb-6" ref="article">
-        <article-teaser
-          :article-link="'/' + article.full_slug"
-          :article-content="article.content"
-          :ishomepage="true" />
-      </article>
+      <client-only>
+        <article v-for="(article, index) in sortedArticles" :key="article._uid" :aria-label="article.content.name"
+                 class="teaser w-full md:w-1/2 px-3 mb-6" ref="article">
+          <article-teaser
+            :article-link="'/' + article.full_slug"
+            :article-content="article.content"
+            :ishomepage="true" />
+        </article>
+      </client-only>
     </div>
   </section>
 </template>
