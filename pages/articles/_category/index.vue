@@ -1,6 +1,6 @@
 <template>
   <section>
-      <Overview v-if="stories" :stories="stories" :category="category"/>
+      <Overview :stories="stories" :category="category"/>
   </section>
 </template>
 
