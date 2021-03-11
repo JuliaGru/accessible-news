@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1>{{ category }}</h1>
-
-    <div class="flex flex-wrap -mx-3">
+    <SubNavigation :nav="navigation" v-if="!$route.params.subcategory" :route="$route.params.category"/>
+    <div class="flex flex-wrap -mx-3" v-if="stories">
       <article v-for="(article, index) in stories" :key="article._uid" :aria-label="article.content.name"
         class="teaser w-full md:w-1/2 px-3 mb-6" ref="article">
         <article-teaser
