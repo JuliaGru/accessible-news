@@ -1,16 +1,17 @@
 <template>
   <header class="mb-8 border-b p-6 relative" style="z-index: 10;">
-    <div class="max-w-5xl items-center flex justify-between mx-auto" ref="maxwidth">
-      <nuxt-link to="/" title="Zur Startseite" class="home">
-        <icon-home/>
-      </nuxt-link>
-      <template v-if="$store.state.store.screenReader">
-        <NavigationSR :nav="navigation" :width="maxWidth"/>
-      </template>
-      <template v-else>
-        <Navigation :nav="navigation" :width="maxWidth"/>
-      </template>
-    </div>
+
+      <div class="max-w-5xl items-center flex justify-between mx-auto" ref="maxwidth">
+        <nuxt-link to="/" title="Zur Startseite" class="home">
+          <icon-home/>
+        </nuxt-link>
+        <template v-if="$store.state.store.screenReader">
+          <NavigationSR :nav="navigation" :width="maxWidth"/>
+        </template>
+        <template v-else>
+          <Navigation :nav="navigation" :width="maxWidth"/>
+        </template>
+      </div>
   </header>
 </template>
 <script>
@@ -30,8 +31,7 @@ export default {
     }
   },
   mounted() {
-    this.maxWidth = this.$refs.maxwidth.clientWidth;
-    window.addEventListener('resize', this.resize);
+    this.initClientOnlyComp();
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.resize);
@@ -40,7 +40,17 @@ export default {
     resize() {
       this.maxWidth = this.$refs.maxwidth.clientWidth;
       this.$store.commit('store/shortMenu', this.maxWidth);
-    }
+    },
+    initClientOnlyComp(count = 10) {
+      this.$nextTick(() => {
+        if (this.$refs.maxwidth) {
+          this.maxWidth = this.$refs.maxwidth.clientWidth;
+          window.addEventListener('resize', this.resize);
+        } else if (count > 0) {
+          this.initClientOnlyComp(count - 1);
+        }
+      });
+    },
   },
   async fetch () {
     let preview_token = 'AZg8k4iwgfML7XgBWjtsUQtt';

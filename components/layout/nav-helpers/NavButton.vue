@@ -1,5 +1,5 @@
 <template>
-  <button :class="classList" class="ml-1" :title="title" :data-toggle="'toggle-' + index" :aria-expanded="index === $parent.navToggle" @click="toggleNav(index, $event)">
+  <button :class="classList" class="ml-1 button-nav" :title="title" :data-toggle="'toggle-' + index" :aria-expanded="index === $parent.navToggle" @click="toggleNav(index, $event)">
     <template v-if="ifCondition">
       <icon-arrow-up/>
     </template>

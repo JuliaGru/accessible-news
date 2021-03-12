@@ -17,11 +17,11 @@
     </template>
 
 
-    <nuxt-link :to="articleLink" :title="'Artikel: ' + articleContent.name">
-      <h3 v-if="ishomepage" class="font-bold pb-4" style="margin: 0">
+    <nuxt-link :to="articleLink" :title="'Artikel: ' + articleContent.name" class="header-link block">
+      <h3 v-if="ishomepage" style="margin-top: 0; margin-bottom: 1rem;">
         {{ articleContent.name }}
       </h3>
-      <h2 v-else class="font-bold pb-4" style="margin: 0">
+      <h2 v-else style="margin-top: 0; margin-bottom: 1rem;">
         {{ articleContent.name }}
       </h2>
     </nuxt-link>

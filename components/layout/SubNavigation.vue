@@ -1,6 +1,8 @@
 <template>
   <div class="bg-var-light px-4 py-2 mb-4 -mx-4 h-12 flex items-center">
-    <h2 style="margin-top: 0; margin-bottom: 0;" class="mr-4" v-if="title">{{ title }}</h2>
+    <nuxt-link :title="title" :to="'/articles/' + route"  class="mr-4 header-link">
+      <h2 style="margin-top: 0; margin-bottom: 0;" v-if="title">{{ title }}</h2>
+    </nuxt-link>
     <nav id="subNavigation">
       <ul class="flex" v-if="nav.story">
         <li v-for="nav_item in nav.story.content.navigation">
