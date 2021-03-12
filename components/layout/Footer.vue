@@ -18,7 +18,7 @@
         </nav>
         <span class="inline-block md:ml-8">© Accessible News {{ $dateFns.format(new Date(), 'yyyy') }}</span>
       </div>
-      <div v-if="!$parent.firstCall" class="max-w-5xl mx-auto text-center mt-2 text-sm text-gray-500">
+      <div v-if="!$parent.firstCall" class="max-w-5xl mx-auto text-center mt-2 text-sm text-gray-700">
         <button v-if="$store.state.store.screenReader" @click="changeScreenReader(false, 'Sie verwenden die visuelle Version')">Zur visuell optimierten Version</button>
         <button v-else @click="changeScreenReader(true, 'Sie verwenden die Screen Reader Version')">Zur Screen Reader optimierten Version</button>
       </div>
