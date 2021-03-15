@@ -47,11 +47,11 @@ export default {
   },
   beforeMount() {
     if(localStorage.getItem('sr')) {
-      if (localStorage.getItem('sr') === 'true') {
-        this.$store.commit('store/setReader', true)
-      } else {
-        this.$store.commit('store/setReader', false)
-      }
+      this.$store.commit('store/setReader', (localStorage.getItem('sr') === 'true'));
+      console.log(localStorage.getItem('vo'));
+      this.$store.commit('store/setVisualOutput', (localStorage.getItem('vo') === 'true'));
+      this.$store.commit('store/setTextualOutput', (localStorage.getItem('to') === 'true'));
+
       this.firstCall = false;
     }
   },

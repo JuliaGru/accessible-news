@@ -1,7 +1,6 @@
 <template>
   <div class="block h-full mt-4">
     <template v-if="!$store.state.store.screenReader">
-
       <template v-if="articleContent.image.id !== null">
         <nuxt-link :to="articleLink" :title="articleContent.name">
           <div class="teaser-image flex justify-center items-end">
@@ -12,7 +11,6 @@
       <template v-else>
         <div class="teaser-image bg-var-light mb-3"></div>
       </template>
-
       <div class="uppercase font-bold text-gray-500">{{ articleContent.tag }}</div>
     </template>
 

@@ -1,5 +1,7 @@
 export const state = () => ({
-  screenReader: false,
+  screenReader: true,
+  visualOutput: false,
+  textualOutput: false,
   theme: 'theme-default',
   navMore: true,
   navMoreLength: 0,
@@ -11,6 +13,12 @@ export const state = () => ({
 export const mutations = {
   setReader(state, bool) {
     state.screenReader = bool;
+  },
+  setVisualOutput(state, bool) {
+    state.visualOutput = bool;
+  },
+  setTextualOutput(state, bool) {
+    state.textualOutput = bool;
   },
   setTheme(state, theme) {
     state.theme = theme;

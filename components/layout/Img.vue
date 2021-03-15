@@ -1,12 +1,12 @@
 <template>
   <div class="my-8">
-    <template v-if="$store.state.store.screenReader">
+    <template v-if="$store.state.store.screenReader && $store.state.store.textualOutput">
       <section :aria-label="'Bild ' + alt" class="bg-var-light py-4 px-5">
         <span class="block">Bild-Titel: {{ title }}</span>
         <span class="block text-sm">© {{ copyright }}</span>
       </section>
     </template>
-    <template v-else>
+    <template v-else-if="!$store.state.store.screenReader || $store.state.store.visualOutput">
       <img :src="source" :alt="alt" :title="title" class="img mb-2" width="800">
       <span class="block">{{ title }}</span>
       <span class="block text-sm text-gray-500">© {{ copyright }}</span>
