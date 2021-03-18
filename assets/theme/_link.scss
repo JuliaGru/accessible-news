@@ -76,3 +76,9 @@ a, button {
     content: none;
   }
 }
+
+a:focus, a:hover {
+  .teaser-image {
+    box-shadow: 0 0 0 6px var(--theme-color-dark);
+  }
+}

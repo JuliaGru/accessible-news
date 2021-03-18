@@ -1,16 +1,16 @@
 <template>
   <div class="block h-full mt-4">
     <template v-if="!$store.state.store.screenReader">
-      <template v-if="articleContent.image.id !== null">
         <nuxt-link :to="articleLink" :title="articleContent.name" @click.native="click(id)">
-          <div class="teaser-image flex justify-center items-end">
-            <img :src="articleContent.image.filename" :alt="articleContent.image.alt" :title="articleContent.image.title" class="img w-full" width="500" />
-          </div>
+          <template v-if="articleContent.image.id !== null">
+            <div class="teaser-image flex justify-center items-end">
+              <img :src="articleContent.image.filename" :alt="articleContent.image.alt" :title="articleContent.image.title" class="img w-full" width="500" />
+            </div>
+          </template>
+          <template v-else>
+            <div class="teaser-image bg-var-light mb-3"></div>
+          </template>
         </nuxt-link>
-      </template>
-      <template v-else>
-        <div class="teaser-image bg-var-light mb-3"></div>
-      </template>
       <div class="uppercase font-bold text-gray-500">{{ articleContent.tag }}</div>
     </template>
 
