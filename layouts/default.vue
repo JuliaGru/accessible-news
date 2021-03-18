@@ -9,8 +9,8 @@
     <client-only>
       <Header/>
     </client-only>
-    <a aria-label="Inhalt" id="skiplink_content" href="#" tabindex="-1"></a>
-    <div id="content" class="prose mx-auto px-6 py-3" ref="content">
+    <a aria-label="Inhalt" id="skiplink_content" href="#" tabindex="-1" ref="content"></a>
+    <div id="content" class="prose mx-auto px-6 py-3">
         <Nuxt/>
     </div>
     <client-only>
@@ -48,7 +48,6 @@ export default {
   beforeMount() {
     if(localStorage.getItem('sr')) {
       this.$store.commit('store/setReader', (localStorage.getItem('sr') === 'true'));
-      console.log(localStorage.getItem('vo'));
       this.$store.commit('store/setVisualOutput', (localStorage.getItem('vo') === 'true'));
       this.$store.commit('store/setTextualOutput', (localStorage.getItem('to') === 'true'));
 
