@@ -4,11 +4,13 @@
     <SubNavigation :nav="navigation" v-if="!$route.params.subcategory" :route="$route.params.category"/>
     <div class="flex flex-wrap -mx-3" v-if="stories">
       <client-only>
-        <article v-for="(article, index) in stories" :key="article._uid" :aria-label="article.content.name"
+        <article v-for="(article, index) in stories" :key="article.id" :aria-label="article.content.name"
           class="teaser w-full md:w-1/2 px-3 mb-6" ref="article">
           <article-teaser
             :article-link="'/' + article.full_slug"
-            :article-content="article.content"/>
+            :article-content="article.content"
+            :id="article.id"
+            :focused="focused"/>
         </article>
       </client-only>
     </div>
@@ -34,10 +36,14 @@ export default {
     return {
       navigation: {},
       articleIndex: -1,
+      focused: "",
     }
   },
   mounted() {
     window.addEventListener('keypress', this.keyPressed);
+    if(window.location.hash !== "") {
+      this.focused = window.location.hash.substr(1);
+    }
   },
   beforeDestroy() {
     window.removeEventListener('keypress', this.keyPressed);
