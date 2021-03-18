@@ -35,7 +35,9 @@ export default {
   },
   async fetch () {
     let preview_token = 'AZg8k4iwgfML7XgBWjtsUQtt';
-    this.navigation = await this.$axios.$get(`https://api.storyblok.com/v1/cdn/stories/navigation/navigation-${this.blok.navslug}/?token=${preview_token}&version=draft`)
+    if (this.blok.navslug) {
+      this.navigation = await this.$axios.$get(`https://api.storyblok.com/v1/cdn/stories/navigation/navigation-${this.blok.navslug}/?token=${preview_token}&version=draft`)
+    }
   },
   mounted() {
     if(window.location.hash !== "") {
