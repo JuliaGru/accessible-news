@@ -27,7 +27,7 @@
         <component :blok="blok" :is="blok.component"/>
       </div>
     </section>
-    <a :href="blok.link.url" target="_blank">Zum originalen Artikel</a>
+    <a :href="blok.link.url" target="_blank" rel="noopener">Zum originalen Artikel</a>
   </div>
 </template>
 
