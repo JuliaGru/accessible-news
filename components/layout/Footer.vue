@@ -21,8 +21,9 @@
       <div v-if="!$parent.firstCall" class="max-w-5xl mx-auto text-center mt-2 text-sm text-gray-700">
         <template v-if="$store.state.store.screenReader">
           <div class="mb-2">
-            <button v-if="$store.state.store.visualOutput" @click="changeVisualOutput(false, 'Sie verwenden textuelle Inhalte')">Zum textuellen Inhalt</button>
-            <button v-else @click="changeVisualOutput(true, 'Sie verwenden visuelle Inhalte')">Zum visuellen Inhalt</button>
+            <button class="mx-1" v-if="!$store.state.store.visualOutput" @click="changeOutput(true, false, 'Sie verwenden die visuelle Darstellung von Bildern/Videos')">Bilder/Videos visuell darstellen</button>
+            <button class="mx-1" v-if="!$store.state.store.textualOutput" @click="changeOutput(false, true, 'Sie verwenden die textuelle Darstellung von Bildern/Videos')">Bilder/Videos textuell darstellen</button>
+            <button class="mx-1" v-if="$store.state.store.visualOutput || $store.state.store.textualOutput" @click="changeOutput(false, false, 'Sie verwenden werden keine Bilder/Videos angezeigt bekokmmen')">Bilder/Videos gar nicht darstellen</button>
           </div>
           <button @click="changeScreenReader(false, 'Sie verwenden die visuelle Version')">Zur visuell optimierten Version</button>
         </template>
@@ -41,7 +42,7 @@ export default {
       localStorage.setItem('sr', sr);
       this.$announcer.assertive(text);
       if(sr) { // if screen reader set to textual output
-        this.setOutput(false);
+        this.setOutput(false, true);
       }
 
       this.$store.commit('store/setNavMore', false);
@@ -52,16 +53,16 @@ export default {
       })
     },
 
-    changeVisualOutput: function (vo, text) {
-      this.setOutput(vo);
+    changeOutput: function (vo, to, text) {
+      this.setOutput(vo, to);
       this.$announcer.assertive(text);
     },
 
-    setOutput: function (vo) {
+    setOutput: function (vo, to) {
       this.$store.commit('store/setVisualOutput', vo)
       localStorage.setItem('vo', vo);
-      this.$store.commit('store/setTextualOutput', !vo)
-      localStorage.setItem('to', !vo);
+      this.$store.commit('store/setTextualOutput', to)
+      localStorage.setItem('to', to);
     }
   }
 }
