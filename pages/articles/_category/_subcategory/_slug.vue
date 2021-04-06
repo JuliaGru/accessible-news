@@ -1,6 +1,8 @@
 <template>
   <section>
-    <Article :blok="story.content" :category="$route.params.category"/>
+    <client-only>
+      <Article :blok="story.content" :category="$route.params.category"/>
+    </client-only>
   </section>
 </template>
 

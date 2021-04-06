@@ -21,13 +21,11 @@
     <section aria-label="Teaser" class="font-bold mt-4">{{ blok.teaser }}</section>
     <Img v-if="blok.image.id !== null" :source="blok.image.filename" :alt="blok.image.alt" :title="blok.image.title" :copyright="blok.image.copyright" />
     <section aria-label="Inhalt">
-      <client-only>
-        <div
-          :key="blok._uid"
-          v-for="blok in blok.content">
-          <component :blok="blok" :is="blok.component"/>
-        </div>
-      </client-only>
+      <div
+        :key="blok._uid"
+        v-for="blok in blok.content">
+        <component :blok="blok" :is="blok.component"/>
+      </div>
     </section>
     <a :href="blok.link.url" target="_blank">Zum originalen Artikel</a>
   </div>
