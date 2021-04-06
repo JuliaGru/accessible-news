@@ -1,12 +1,12 @@
 <template>
   <div class="bg-var-light px-4 py-2 mb-4 -mx-4 h-12 flex items-center">
-    <nuxt-link :title="title" :to="'/articles/' + route"  class="mr-4 header-link" v-if="title">
+    <nuxt-link :to="'/articles/' + route"  class="mr-4 header-link" v-if="title">
       <h2 style="margin-top: 0; margin-bottom: 0;">{{ title }}</h2>
     </nuxt-link>
     <nav id="subNavigation">
       <ul class="flex" v-if="nav.story">
         <li v-for="nav_item in nav.story.content.navigation">
-          <nuxt-link :title="nav_item.name" :to="'/articles/' + route + nav_item.link.url">{{ nav_item.name }}</nuxt-link>
+          <nuxt-link :to="'/articles/' + route + nav_item.link.url">{{ nav_item.name }}</nuxt-link>
         </li>
       </ul>
     </nav>
