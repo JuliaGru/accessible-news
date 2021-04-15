@@ -1,5 +1,5 @@
 <template>
-  <Img :source="blok.image.filename" :alt="blok.image.alt" :title="blok.image.title" :copyright="blok.image.copyright"/>
+    <Img :source="blok.image.filename" :alt="blok.image.alt" :title="blok.image.title" :copyright="blok.image.copyright" :id="blok.image.id"/>
 </template>
 
 <script>

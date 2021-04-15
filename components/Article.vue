@@ -19,7 +19,7 @@
     </div>
 
     <section aria-label="Teaser" class="font-bold mt-4">{{ blok.teaser }}</section>
-    <Img v-if="blok.image.id !== null" :source="blok.image.filename" :alt="blok.image.alt" :title="blok.image.title" :copyright="blok.image.copyright" />
+    <Img v-if="blok.image.id !== null" :source="blok.image.filename" :alt="blok.image.alt" :title="blok.image.title" :copyright="blok.image.copyright" :id="blok.image.id"/>
     <section aria-label="Inhalt">
       <div
         :key="blok._uid"

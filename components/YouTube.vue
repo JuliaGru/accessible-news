@@ -1,7 +1,8 @@
 <template>
   <div class="my-8">
     <template v-if="$store.state.store.screenReader && $store.state.store.textualOutput">
-      <section :aria-label="'Youtube Video:' + blok.title" class="bg-var-light py-4 px-5">
+      <section :aria-labelledby="blok.id" class="bg-var-light py-4 px-5">
+        <div :id="blok.id" class="font-bold">Youtube Video: {{blok.title}}</div>
         <div>Beschreibung: {{ blok.description }}</div>
       </section>
     </template>
