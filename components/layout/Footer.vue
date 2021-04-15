@@ -1,7 +1,7 @@
 <template>
   <div>
     <a aria-label="Footer" id="skiplink_footer" href="#" tabindex="-1"></a>
-    <footer id="footer" class="mt-8 border-t p-6" v-bind:class="[ $parent.firstCall ? 'mb-24' : '']">
+    <footer id="footer" class="mt-8 border-t p-6">
       <div class="max-w-5xl md:flex justify-center mx-auto text-center">
         <nav>
           <ul class="flex justify-center">

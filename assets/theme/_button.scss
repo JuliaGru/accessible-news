@@ -1,4 +1,12 @@
 .button {
   background: var( --theme-color-dark );
   color: white;
+
+  &:hover, &:focus {
+    background: var( --theme-color );
+  }
+
+  &:after {
+    content: none;
+  }
 }

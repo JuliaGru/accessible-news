@@ -1,28 +1,28 @@
 <template>
-  <div v-if="$parent.firstCall" class="fixed top-auto bottom-0 left-0 shadow w-full bg-white border-t p-4 text-center z-10">
-    <template v-if="questions === 0">
+  <div v-if="$parent.firstCall" class="border-b p-4 text-center z-10" aria-live="polite">
+    <div :class="questionSRclass">
       <p class="pb-2">Verwenden Sie einen Screen Reader?</p>
       <div class="flex justify-center">
-        <div role="button" @click="changeScreenReader(true)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</div>
-        <div role="button" @click="changeScreenReader(false)" class="button font-bold px-2 py-1 w-16">Nein</div>
+        <button @click="changeScreenReader(true)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</button>
+        <button @click="changeScreenReader(false)" class="button font-bold px-2 py-1 w-16">Nein</button>
       </div>
-    </template>
+    </div>
 
-    <template v-if="questions === 1">
+    <div :class="questionVOclass">
       <p class="pb-2">Wollen Sie eine visuelle Darstellung von Bildern und Videos?</p>
       <div class="flex justify-center">
-        <div role="button" @click="changeVisualOutput(true)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</div>
-        <div role="button" @click="changeVisualOutput(false)" class="button font-bold px-2 py-1 w-16">Nein</div>
+        <button role="button" @click="changeVisualOutput(true)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</button>
+        <button role="button" @click="changeVisualOutput(false)" class="button font-bold px-2 py-1 w-16">Nein</button>
       </div>
-    </template>
+    </div>
 
-    <template v-if="questions === 2">
+    <div :class="questionTOclass">
       <p class="pb-2">Wollen Sie eine textuelle Darstellung von Bildern und Videos?</p>
       <div class="flex justify-center">
-        <div role="button" @click="changeTextualOutput(true)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</div>
-        <div role="button" @click="changeTextualOutput(false)" class="button font-bold px-2 py-1 w-16">Nein</div>
+        <button role="button" @click="changeTextualOutput(true)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</button>
+        <button role="button" @click="changeTextualOutput(false)" class="button font-bold px-2 py-1 w-16">Nein</button>
       </div>
-    </template>
+    </div>
   </div>
 </template>
 
@@ -31,6 +31,9 @@ export default {
   data() {
     return {
       questions: 0,
+      questionSRclass: '',
+      questionVOclass: 'hidden',
+      questionTOclass: 'hidden'
     }
   },
   methods: {
@@ -42,6 +45,8 @@ export default {
         this.setVisualOutput(false)
       } else {
         this.questions++;
+        this.questionSRclass = "hidden";
+        this.questionVOclass = "";
       }
       localStorage.setItem('sr', sr);
 
@@ -60,6 +65,8 @@ export default {
         this.setTextualOutput(false)
       } else {
         this.questions++;
+        this.questionVOclass = "hidden";
+        this.questionTOclass = "";
       }
     },
 

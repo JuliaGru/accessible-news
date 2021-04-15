@@ -46,7 +46,7 @@ export default {
     }
   },
   beforeMount() {
-    if(localStorage.getItem('sr')) {
+    if(localStorage.getItem('sr') && localStorage.getItem('vo') && localStorage.getItem('to')) {
       this.$store.commit('store/setReader', (localStorage.getItem('sr') === 'true'));
       this.$store.commit('store/setVisualOutput', (localStorage.getItem('vo') === 'true'));
       this.$store.commit('store/setTextualOutput', (localStorage.getItem('to') === 'true'));
