@@ -2,7 +2,7 @@
   <div class="my-8">
     <template v-if="$store.state.store.screenReader && $store.state.store.textualOutput">
       <section :aria-labelledby="id" class="bg-var-light py-4 px-5">
-        <span :id="id" class="block font-bold">Bild {{ alt }}</span>
+        <span :id="id" class="block font-bold">Bild: {{ alt }}</span>
         <span class="block">Bild-Titel: {{ title }}</span>
         <span class="block text-sm">© {{ copyright }}</span>
       </section>
