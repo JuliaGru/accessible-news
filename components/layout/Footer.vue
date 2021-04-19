@@ -18,7 +18,6 @@
         </nav>
         <span class="inline-block md:ml-8">© Accessible News {{ $dateFns.format(new Date(), 'yyyy') }}</span>
       </div>
-      <a aria-label="Ansichts Einstellungen" id="skiplink_ansicht" href="#" tabindex="-1"></a>
       <div v-if="!$parent.firstCall" class="max-w-5xl mx-auto text-center mt-2 text-sm text-gray-700">
         <template v-if="$store.state.store.screenReader">
           <div class="mb-2">
@@ -44,6 +43,8 @@ export default {
       this.$announcer.assertive(text);
       if(sr) { // if screen reader set to textual output
         this.setOutput(false, true);
+      } else {
+        window.history.pushState({page: 1}, "Overview", "#vo");
       }
 
       this.$store.commit('store/setNavMore', false);
@@ -60,6 +61,7 @@ export default {
     },
 
     setOutput: function (vo, to) {
+      window.history.pushState({page: 1}, "Overview", "#sr-vo-" + vo + "-to-" + to);
       this.$store.commit('store/setVisualOutput', vo)
       localStorage.setItem('vo', vo);
       this.$store.commit('store/setTextualOutput', to)
