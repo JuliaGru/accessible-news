@@ -35,7 +35,6 @@ export default {
       required: true
     },
     id: {
-      type: String,
       required: true
     },
   }
