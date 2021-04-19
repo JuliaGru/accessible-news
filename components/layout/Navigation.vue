@@ -31,7 +31,7 @@
 </template>
 
 <style>
-li:hover > ul {
+li:hover > ul, li:focus-within > ul {
   display: block !important;
 }
 </style>

@@ -79,6 +79,7 @@ a, button {
 
 a:focus, a:hover {
   .teaser-image {
-    box-shadow: 0 0 0 6px var(--theme-color-dark);
+    //box-shadow: 0 0 0 6px var(--theme-color-dark);
+    box-shadow: 0 0 0 6px #EB8F1E;
   }
 }
