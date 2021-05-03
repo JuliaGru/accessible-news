@@ -51,6 +51,12 @@ export default {
       this.$store.commit('store/setVisualOutput', (localStorage.getItem('vo') === 'true'));
       this.$store.commit('store/setTextualOutput', (localStorage.getItem('to') === 'true'));
 
+      if(localStorage.getItem('sr') !== 'true') {
+        window.history.pushState({page: 1}, "Overview", "#vo");
+      } else {
+        window.history.pushState({page: 1}, "Overview", "#sr-vo-" + (localStorage.getItem('vo') === 'true') + "-to-" + (localStorage.getItem('to') === 'true'));
+      }
+
       this.firstCall = false;
     }
   },
