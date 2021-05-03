@@ -59,17 +59,13 @@ export default {
   methods: {
     popstate(event) {
       let hash = window.location.hash.substr(1);
-      console.log(hash);
       if (hash === "vo") {
         this.changeSR(false, 'Sie verwenden die visuelle Version', false);
       } else if (hash === "sr-vo-false-to-false") {
-        console.log("fail2");
         this.changeOutput(false, false, 'Sie werden keine Bilder/Videos angezeigt bekommen', false)
       } else if (hash === "sr-vo-true-to-false") {
-        console.log("fail3");
         this.changeOutput(true, false, 'Sie verwenden die visuelle Darstellung von Bildern/Videos', false)
       } else if (hash === "sr-vo-false-to-true") {
-        console.log("fail4");
         this.changeOutput(false, true, 'Sie verwenden die textuelle Darstellung von Bildern/Videos', false)
       }
     },
@@ -130,7 +126,6 @@ export default {
       this.$store.commit('store/setReader', sr)
       localStorage.setItem('sr', sr);
       this.$announcer.assertive(text);
-      console.log("fail1");
       if(sr) { // if screen reader = true set to textual output
         if (pushstate) {
           window.history.pushState({page: 1}, "Overview", "#sr-vo-false-to-true");
