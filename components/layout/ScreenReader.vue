@@ -4,24 +4,24 @@
       <div :class="questionSRclass">
         <p class="pb-2">Verwenden Sie einen Screen Reader?</p>
         <div class="flex justify-center">
-          <button @click="changeScreenReader(true)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</button>
-          <button @click="changeScreenReader(false)" class="button font-bold px-2 py-1 w-16">Nein</button>
+          <button @click="initialScreenReader(true)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</button>
+          <button @click="initialScreenReader(false)" class="button font-bold px-2 py-1 w-16">Nein</button>
         </div>
       </div>
 
       <div :class="questionVOclass">
         <p class="pb-2">Wollen Sie eine visuelle Darstellung von Bildern und Videos?</p>
         <div class="flex justify-center">
-          <button role="button" @click="changeVisualOutput(true)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</button>
-          <button role="button" @click="changeVisualOutput(false)" class="button font-bold px-2 py-1 w-16">Nein</button>
+          <button role="button" @click="initialVisualOutput(true)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</button>
+          <button role="button" @click="initialVisualOutput(false)" class="button font-bold px-2 py-1 w-16">Nein</button>
         </div>
       </div>
 
       <div :class="questionTOclass">
         <p class="pb-2">Wollen Sie eine textuelle Darstellung von Bildern und Videos?</p>
         <div class="flex justify-center">
-          <button role="button" @click="changeTextualOutput(true)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</button>
-          <button role="button" @click="changeTextualOutput(false)" class="button font-bold px-2 py-1 w-16">Nein</button>
+          <button role="button" @click="initialTextualOutput(true)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</button>
+          <button role="button" @click="initialTextualOutput(false)" class="button font-bold px-2 py-1 w-16">Nein</button>
         </div>
       </div>
     </div>
@@ -69,8 +69,11 @@ export default {
         this.changeOutput(false, true, 'Sie verwenden die textuelle Darstellung von Bildern/Videos', false)
       }
     },
-    changeScreenReader: function (sr) {
-      this.$store.commit('store/setReader', sr)
+
+    //initial functions
+    initialScreenReader: function (sr) {
+      this.setScreenReader(sr);
+
       if(!sr) { //only then firstCall otherwise Questions will go on
         this.$parent.firstCall = false;
         this.setTextualOutput(false)
@@ -80,18 +83,12 @@ export default {
         this.questionSRclass = "hidden";
         this.questionVOclass = "";
       }
-      localStorage.setItem('sr', sr);
-
-      this.$store.commit('store/setNavMore', false);
-
-      this.$nextTick(function () {
-        this.$store.commit('store/setNavItemsLength', this.$parent.$children[4].$children[1].$refs.navitems); //get to navigation
-        this.$store.commit('store/shortMenu', this.$parent.$children[4].$refs.maxwidth.clientWidth);
-      })
+      this.setNav();
     },
 
-    changeVisualOutput: function (output) {
-      this.setVisualOutput(output)
+    initialVisualOutput: function (output) {
+      this.setVisualOutput(output);
+
       if(output) { //only then firstCall otherwise Questions will go on
         this.$parent.firstCall = false;
         this.setTextualOutput(false)
@@ -102,14 +99,15 @@ export default {
       }
     },
 
+    initialTextualOutput: function (output) {
+      this.setTextualOutput(output)
+      this.$parent.firstCall = false;
+    },
+
+    //setter
     setScreenReader: function (bool) {
       this.$store.commit('store/setReader', bool)
       localStorage.setItem('sr', bool);
-    },
-
-    changeTextualOutput: function (output) {
-      this.setTextualOutput(output)
-      this.$parent.firstCall = false;
     },
 
     setVisualOutput: function (bool) {
@@ -122,10 +120,11 @@ export default {
       localStorage.setItem('to', bool);
     },
 
+    // changes afterwards
     changeSR: function (sr, text, pushstate = true) {
-      this.$store.commit('store/setReader', sr)
-      localStorage.setItem('sr', sr);
+      this.setScreenReader(sr);
       this.$announcer.assertive(text);
+
       if(sr) { // if screen reader = true set to textual output
         if (pushstate) {
           window.history.pushState({page: 1}, "Overview", "#sr-vo-false-to-true");
@@ -140,12 +139,7 @@ export default {
         this.setTextualOutput(false);
       }
 
-      this.$store.commit('store/setNavMore', false);
-
-      this.$nextTick(function () {
-        this.$store.commit('store/setNavItemsLength', this.$parent.$children[4].$children[1].$refs.navitems); //get to navigation
-        this.$store.commit('store/shortMenu', this.$parent.$children[4].$refs.maxwidth.clientWidth);
-      })
+      this.setNav();
     },
 
     changeOutput: function (vo, to, text, pushstate = true) {
@@ -156,6 +150,16 @@ export default {
       this.setVisualOutput(vo);
       this.setTextualOutput(to);
       this.$announcer.assertive(text);
+    },
+
+    //helper
+    setNav: function () {
+      this.$store.commit('store/setNavMore', false);
+
+      this.$nextTick(function () {
+        this.$store.commit('store/setNavItemsLength', this.$parent.$children[4].$children[1].$refs.navitems); //get to navigation
+        this.$store.commit('store/shortMenu', this.$parent.$children[4].$refs.maxwidth.clientWidth);
+      })
     },
   }
 }
