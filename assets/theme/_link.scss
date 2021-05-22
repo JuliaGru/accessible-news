@@ -71,6 +71,7 @@ a, button {
 .skiplink {
   @apply opacity-0 absolute p-2 text-white font-bold pointer-events-none;
   background: var( --theme-color-dark );
+  top: 5.5rem;
 
   &:after {
     content: none;
