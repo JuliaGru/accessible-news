@@ -1,18 +1,20 @@
 <template>
   <div :class="$store.state.store.theme">
-    <client-only>
-      <VueAnnouncer />
-      <ScreenReader/>
-    </client-only>
-    <a aria-label="Skip Links" id="skiplink" ref="skiplink" href="#" tabindex="-1"></a>
-    <SkipLinks/>
-    <client-only>
-      <Header/>
-    </client-only>
+    <header>
+      <client-only>
+        <VueAnnouncer />
+        <ScreenReader/>
+      </client-only>
+      <a aria-label="Skip Links" id="skiplink" ref="skiplink" href="#" tabindex="-1"></a>
+      <SkipLinks/>
+      <client-only>
+        <Header/>
+      </client-only>
+    </header>
     <a aria-label="Inhalt" id="skiplink_content" ref="content" href="#" tabindex="-1"></a>
-    <div id="content" class="prose mx-auto px-6 py-3">
+    <main id="content" class="prose mx-auto px-6 py-3">
         <Nuxt/>
-    </div>
+    </main>
     <client-only>
       <Footer/>
     </client-only>
