@@ -6,7 +6,6 @@
       v-for="blok in blok.content" class="bg-var-light py-4 px-5 my-8">
       <component :blok="blok" :is="blok.component"/>
     </div>
-    <p class="sr-only">Infobox Ende</p>
   </section>
 </template>
 
