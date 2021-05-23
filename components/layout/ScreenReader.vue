@@ -28,14 +28,14 @@
     <div v-else class="border-b text-center py-2 text-sm text-gray-700" aria-live="polite">
       <span class="font-bold">Ansicht Einstellung:</span>
       <template v-if="$store.state.store.screenReader">
-        <button @click="changeSR(false, 'Sie verwenden die visuelle Version')">Zur visuell optimierten Version</button>
+        <button @click="changeSR(false, text.visual)">Zur visuell optimierten Version</button>
         <div class="mt-1">
-          <button class="mx-1" v-if="!$store.state.store.visualOutput" @click="changeOutput(true, false, 'Sie verwenden die visuelle Darstellung von Bildern/Videos')">Bilder/Videos visuell darstellen</button>
-          <button class="mx-1" v-if="!$store.state.store.textualOutput" @click="changeOutput(false, true, 'Sie verwenden die textuelle Darstellung von Bildern/Videos')">Bilder/Videos textuell darstellen</button>
-          <button class="mx-1" v-if="$store.state.store.visualOutput || $store.state.store.textualOutput" @click="changeOutput(false, false, 'Sie werden keine Bilder/Videos angezeigt bekokmmen')">Bilder/Videos gar nicht darstellen</button>
+          <button class="mx-1" v-if="!$store.state.store.visualOutput" @click="changeOutput(true, false, text.visImg)">Bilder/Videos visuell darstellen</button>
+          <button class="mx-1" v-if="!$store.state.store.textualOutput" @click="changeOutput(false, true, text.texImg)">Bilder/Videos textuell darstellen</button>
+          <button class="mx-1" v-if="$store.state.store.visualOutput || $store.state.store.textualOutput" @click="changeOutput(false, false, text.noImg)">Bilder/Videos gar nicht darstellen</button>
         </div>
       </template>
-      <button v-else @click="changeSR(true, 'Sie verwenden die Screen Reader Version')">Zur Screen Reader optimierten Version</button>
+      <button v-else @click="changeSR(true, text.screenreader)">Zur Screen Reader optimierten Version</button>
     </div>
   </div>
 </template>
@@ -47,7 +47,14 @@ export default {
       questions: 0,
       questionSRclass: '',
       questionVOclass: 'hidden',
-      questionTOclass: 'hidden'
+      questionTOclass: 'hidden',
+      text: {
+        visual: 'Sie verwenden die Screen Reader Version',
+        screenreader: 'Sie verwenden die visuelle Version',
+        noImg: 'Sie werden keine Bilder/Videos angezeigt bekommen',
+        visImg: 'Sie verwenden die visuelle Darstellung von Bildern/Videos',
+        texImg: 'Sie verwenden die textuelle Darstellung von Bildern/Videos'
+      }
     }
   },
   mounted() {
@@ -60,13 +67,13 @@ export default {
     popstate(event) {
       let hash = window.location.hash.substr(1);
       if (hash === "vo") {
-        this.changeSR(false, 'Sie verwenden die visuelle Version', false);
+        this.changeSR(false, this.text.visual, false);
       } else if (hash === "sr-vo-false-to-false") {
-        this.changeOutput(false, false, 'Sie werden keine Bilder/Videos angezeigt bekommen', false)
+        this.changeOutput(false, false, this.text.noImg, false)
       } else if (hash === "sr-vo-true-to-false") {
-        this.changeOutput(true, false, 'Sie verwenden die visuelle Darstellung von Bildern/Videos', false)
+        this.changeOutput(true, false, this.text.visImg, false)
       } else if (hash === "sr-vo-false-to-true") {
-        this.changeOutput(false, true, 'Sie verwenden die textuelle Darstellung von Bildern/Videos', false)
+        this.changeOutput(false, true, this.text.texImg, false)
       }
     },
 
