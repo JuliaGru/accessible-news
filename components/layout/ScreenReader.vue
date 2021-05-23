@@ -1,27 +1,11 @@
 <template>
   <div>
     <div v-if="$parent.firstCall" class="border-b p-4 text-center z-10" aria-live="polite">
-      <div :class="questionSRclass">
-        <p class="pb-2">Verwenden Sie einen Screen Reader?</p>
+      <div>
+        <p class="pb-2">{{ questions.text[questions.number] }}</p>
         <div class="flex justify-center">
-          <button @click="initialScreenReader(true)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</button>
-          <button @click="initialScreenReader(false)" class="button font-bold px-2 py-1 w-16">Nein</button>
-        </div>
-      </div>
-
-      <div :class="questionVOclass">
-        <p class="pb-2">Wollen Sie eine visuelle Darstellung von Bildern und Videos?</p>
-        <div class="flex justify-center">
-          <button role="button" @click="initialVisualOutput(true)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</button>
-          <button role="button" @click="initialVisualOutput(false)" class="button font-bold px-2 py-1 w-16">Nein</button>
-        </div>
-      </div>
-
-      <div :class="questionTOclass">
-        <p class="pb-2">Wollen Sie eine textuelle Darstellung von Bildern und Videos?</p>
-        <div class="flex justify-center">
-          <button role="button" @click="initialTextualOutput(true)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</button>
-          <button role="button" @click="initialTextualOutput(false)" class="button font-bold px-2 py-1 w-16">Nein</button>
+          <button @click="setScreenReaderOptions(questions.answers[questions.number].yes, false)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</button>
+          <button @click="setScreenReaderOptions(questions.answers[questions.number].no, false)" class="button font-bold px-2 py-1 w-16">Nein</button>
         </div>
       </div>
     </div>
@@ -44,10 +28,52 @@
 export default {
   data() {
     return {
-      questions: 0,
-      questionSRclass: '',
-      questionVOclass: 'hidden',
-      questionTOclass: 'hidden',
+      questions: {
+        number: 0,
+        text: [
+          'Verwenden Sie einen Screen Reader?',
+          'Wollen Sie eine visuelle Darstellung von Bildern und Videos?',
+          'Wollen Sie eine textuelle Darstellung von Bildern und Videos?'
+        ],
+        answers: [
+          {
+            yes: {
+              nq: true,
+            },
+            no: {
+              nq: false,
+              sr: false,
+              to: false,
+              vo: false
+            },
+          },
+          {
+            yes: {
+              nq: false,
+              sr: true,
+              to: false,
+              vo: true
+            },
+            no: {
+              nq: true,
+            },
+          },
+          {
+            yes: {
+              nq: false,
+              sr: true,
+              to: true,
+              vo: false
+            },
+            no: {
+              nq: false,
+              sr: true,
+              to: false,
+              vo: false
+            },
+          },
+        ],
+      },
       text: {
         visual: 'Sie verwenden die Screen Reader Version',
         screenreader: 'Sie verwenden die visuelle Version',
@@ -77,38 +103,20 @@ export default {
       }
     },
 
-    //initial functions
-    initialScreenReader: function (sr) {
-      this.setScreenReader(sr);
-
-      if(!sr) { //only then firstCall otherwise Questions will go on
+    setScreenReaderOptions: function (param, pushstate) {
+      if (!param.nq) {
+        if (pushstate) {
+          //window.history.pushState({page: 1}, "Overview", "#sr-vo-false-to-true");
+        }
+        this.setScreenReader(param.sr)
+        this.setTextualOutput(param.to)
+        this.setVisualOutput(param.vo)
         this.$parent.firstCall = false;
-        this.setTextualOutput(false)
-        this.setVisualOutput(false)
+        this.setNav();
+        // @TODO add announcement
       } else {
-        this.questions++;
-        this.questionSRclass = "hidden";
-        this.questionVOclass = "";
+        this.questions.number++;
       }
-      this.setNav();
-    },
-
-    initialVisualOutput: function (output) {
-      this.setVisualOutput(output);
-
-      if(output) { //only then firstCall otherwise Questions will go on
-        this.$parent.firstCall = false;
-        this.setTextualOutput(false)
-      } else {
-        this.questions++;
-        this.questionVOclass = "hidden";
-        this.questionTOclass = "";
-      }
-    },
-
-    initialTextualOutput: function (output) {
-      this.setTextualOutput(output)
-      this.$parent.firstCall = false;
     },
 
     //setter
