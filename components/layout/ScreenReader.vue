@@ -1,41 +1,25 @@
 <template>
   <div>
     <div v-if="$parent.firstCall" class="border-b p-4 text-center z-10" aria-live="polite">
-      <div :class="questionSRclass">
-        <p class="pb-2">Verwenden Sie einen Screen Reader?</p>
+      <div>
+        <p class="pb-2">{{ questions[numberQ].text }}</p>
         <div class="flex justify-center">
-          <button @click="initialScreenReader(true)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</button>
-          <button @click="initialScreenReader(false)" class="button font-bold px-2 py-1 w-16">Nein</button>
-        </div>
-      </div>
-
-      <div :class="questionVOclass">
-        <p class="pb-2">Wollen Sie eine visuelle Darstellung von Bildern und Videos?</p>
-        <div class="flex justify-center">
-          <button role="button" @click="initialVisualOutput(true)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</button>
-          <button role="button" @click="initialVisualOutput(false)" class="button font-bold px-2 py-1 w-16">Nein</button>
-        </div>
-      </div>
-
-      <div :class="questionTOclass">
-        <p class="pb-2">Wollen Sie eine textuelle Darstellung von Bildern und Videos?</p>
-        <div class="flex justify-center">
-          <button role="button" @click="initialTextualOutput(true)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</button>
-          <button role="button" @click="initialTextualOutput(false)" class="button font-bold px-2 py-1 w-16">Nein</button>
+          <button @click="setOptions(questions[numberQ].answers.yes, false)" class="button font-bold px-2 py-1 mr-2 w-16">Ja</button>
+          <button @click="setOptions(questions[numberQ].answers.no, false)" class="button font-bold px-2 py-1 w-16">Nein</button>
         </div>
       </div>
     </div>
     <div v-else class="border-b text-center py-2 text-sm text-gray-700" aria-live="polite">
       <span class="font-bold">Ansicht Einstellung:</span>
       <template v-if="$store.state.store.screenReader">
-        <button @click="changeSR(false, 'Sie verwenden die visuelle Version')">Zur visuell optimierten Version</button>
+        <button @click="setOptions(questions[0].answers.no)">Zur visuell optimierten Version</button>
         <div class="mt-1">
-          <button class="mx-1" v-if="!$store.state.store.visualOutput" @click="changeOutput(true, false, 'Sie verwenden die visuelle Darstellung von Bildern/Videos')">Bilder/Videos visuell darstellen</button>
-          <button class="mx-1" v-if="!$store.state.store.textualOutput" @click="changeOutput(false, true, 'Sie verwenden die textuelle Darstellung von Bildern/Videos')">Bilder/Videos textuell darstellen</button>
-          <button class="mx-1" v-if="$store.state.store.visualOutput || $store.state.store.textualOutput" @click="changeOutput(false, false, 'Sie werden keine Bilder/Videos angezeigt bekokmmen')">Bilder/Videos gar nicht darstellen</button>
+          <button class="mx-1" v-if="!$store.state.store.visualOutput" @click="setOptions(questions[1].answers.yes)">Bilder/Videos visuell darstellen</button>
+          <button class="mx-1" v-if="!$store.state.store.textualOutput" @click="setOptions(questions[2].answers.yes)">Bilder/Videos textuell darstellen</button>
+          <button class="mx-1" v-if="$store.state.store.visualOutput || $store.state.store.textualOutput" @click="setOptions(questions[2].answers.no)">Bilder/Videos gar nicht darstellen</button>
         </div>
       </template>
-      <button v-else @click="changeSR(true, 'Sie verwenden die Screen Reader Version')">Zur Screen Reader optimierten Version</button>
+      <button v-else @click="setOptions(questions[3].answers.yes)">Zur Screen Reader optimierten Version</button>
     </div>
   </div>
 </template>
@@ -44,10 +28,75 @@
 export default {
   data() {
     return {
-      questions: 0,
-      questionSRclass: '',
-      questionVOclass: 'hidden',
-      questionTOclass: 'hidden'
+      numberQ: 0,
+      questions: [
+        {
+          text: 'Verwenden Sie einen Screen Reader?',
+          answers: {
+            yes: {
+              nq: true,
+            },
+            no: {
+              nq: false,
+              sr: false,
+              to: false,
+              vo: false,
+              ps: '#vo',
+              an: 'Sie verwenden die visuell optimierte Version'
+            },
+          },
+        },
+        {
+          text: 'Wollen Sie eine visuelle Darstellung von Bildern und Videos?',
+          answers: {
+            yes: {
+              nq: false,
+              sr: true,
+              to: false,
+              vo: true,
+              ps: '#sr-vo-true-to-false',
+              an: 'Sie verwenden die visuelle Darstellung von Bildern/Videos mit einem Screen-Reader'
+            },
+            no: {
+              nq: true,
+            }
+          },
+        },
+        {
+          text: 'Wollen Sie eine textuelle Darstellung von Bildern und Videos?',
+          answers: {
+            yes: {
+              nq: false,
+              sr: true,
+              to: true,
+              vo: false,
+              ps: '#sr-vo-false-to-true',
+              an: 'Sie verwenden die textuelle Darstellung von Bildern/Videos mit einem Screen-Reader'
+            },
+            no: {
+              nq: false,
+              sr: true,
+              to: false,
+              vo: false,
+              ps: '#sr-vo-false-to-false',
+              an: 'Sie werden keine Bilder/Videos angezeigt bekommen in der Screen-Reader optimierten Version',
+            }
+          },
+        },
+        // default sr -> for switching afterwards
+        {
+          answers: {
+            yes: {
+              nq: false,
+              sr: true,
+              to: true,
+              vo: false,
+              ps: '#sr-vo-false-to-true',
+              an: 'Sie verwenden die Screen-Reader optimierte Version'
+            },
+          },
+        }
+      ],
     }
   },
   mounted() {
@@ -60,48 +109,30 @@ export default {
     popstate(event) {
       let hash = window.location.hash.substr(1);
       if (hash === "vo") {
-        this.changeSR(false, 'Sie verwenden die visuelle Version', false);
+        this.setOptions(this.questions[0].answers.no, false)
       } else if (hash === "sr-vo-false-to-false") {
-        this.changeOutput(false, false, 'Sie werden keine Bilder/Videos angezeigt bekommen', false)
+        this.setOptions(this.questions[2].answers.no, false)
       } else if (hash === "sr-vo-true-to-false") {
-        this.changeOutput(true, false, 'Sie verwenden die visuelle Darstellung von Bildern/Videos', false)
+        this.setOptions(this.questions[1].answers.yes, false)
       } else if (hash === "sr-vo-false-to-true") {
-        this.changeOutput(false, true, 'Sie verwenden die textuelle Darstellung von Bildern/Videos', false)
+        this.setOptions(this.questions[2].answers.yes, false)
       }
     },
 
-    //initial functions
-    initialScreenReader: function (sr) {
-      this.setScreenReader(sr);
-
-      if(!sr) { //only then firstCall otherwise Questions will go on
+    setOptions: function (param, pushState = true) {
+      if (!param.nq) {
+        if (pushState) {
+          window.history.pushState({page: 1}, "Overview", param.ps);
+        }
+        this.setScreenReader(param.sr)
+        this.setTextualOutput(param.to)
+        this.setVisualOutput(param.vo)
         this.$parent.firstCall = false;
-        this.setTextualOutput(false)
-        this.setVisualOutput(false)
+        this.setNav();
+        this.$announcer.assertive(param.an);
       } else {
-        this.questions++;
-        this.questionSRclass = "hidden";
-        this.questionVOclass = "";
+        this.numberQ++;
       }
-      this.setNav();
-    },
-
-    initialVisualOutput: function (output) {
-      this.setVisualOutput(output);
-
-      if(output) { //only then firstCall otherwise Questions will go on
-        this.$parent.firstCall = false;
-        this.setTextualOutput(false)
-      } else {
-        this.questions++;
-        this.questionVOclass = "hidden";
-        this.questionTOclass = "";
-      }
-    },
-
-    initialTextualOutput: function (output) {
-      this.setTextualOutput(output)
-      this.$parent.firstCall = false;
     },
 
     //setter
@@ -118,38 +149,6 @@ export default {
     setTextualOutput: function (bool) {
       this.$store.commit('store/setTextualOutput', bool)
       localStorage.setItem('to', bool);
-    },
-
-    // changes afterwards
-    changeSR: function (sr, text, pushstate = true) {
-      this.setScreenReader(sr);
-      this.$announcer.assertive(text);
-
-      if(sr) { // if screen reader = true set to textual output
-        if (pushstate) {
-          window.history.pushState({page: 1}, "Overview", "#sr-vo-false-to-true");
-        }
-        this.setVisualOutput(false);
-        this.setTextualOutput(true);
-      } else {
-        if (pushstate) {
-          window.history.pushState({page: 1}, "Overview", "#vo");
-        }
-        this.setVisualOutput(false);
-        this.setTextualOutput(false);
-      }
-
-      this.setNav();
-    },
-
-    changeOutput: function (vo, to, text, pushstate = true) {
-      if (pushstate) {
-        window.history.pushState({page: 1}, "Overview", "#sr-vo-" + vo + "-to-" + to);
-      }
-      this.setScreenReader(true);
-      this.setVisualOutput(vo);
-      this.setTextualOutput(to);
-      this.$announcer.assertive(text);
     },
 
     //helper
