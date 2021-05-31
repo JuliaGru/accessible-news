@@ -1,7 +1,7 @@
 <template>
   <div>
     <template v-if="!$store.state.store.screenReader">
-      <span class="uppercase text-gray-500">{{ blok.tag }}</span>
+      <span class="uppercase text-gray-600">{{ blok.tag }}</span>
     </template>
     <h1>{{ blok.name }}</h1>
     <section aria-label="Artikel Meta-Daten" v-if="$store.state.store.screenReader">

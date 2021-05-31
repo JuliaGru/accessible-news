@@ -10,7 +10,7 @@
     <template v-else-if="!$store.state.store.screenReader || $store.state.store.visualOutput">
       <img :src="source" :alt="alt" :title="title" class="img mb-2" width="800">
       <span class="block">{{ title }}</span>
-      <span class="block text-sm text-gray-500">© {{ copyright }}</span>
+      <span class="block text-sm text-gray-600">© {{ copyright }}</span>
     </template>
   </div>
 </template>
