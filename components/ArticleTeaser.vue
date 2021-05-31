@@ -11,7 +11,7 @@
             <div class="teaser-image bg-var-light mb-3"></div>
           </template>
         </nuxt-link>
-      <div class="uppercase font-bold text-gray-600">{{ articleContent.tag }}</div>
+      <div class="uppercase font-bold text-gray-700">{{ articleContent.tag }}</div>
     </template>
 
     <nuxt-link :to="articleLink" :title="'Artikel: ' + articleContent.name" class="header-link block" @click.native="click(id)" :id="id" :ref="id">
