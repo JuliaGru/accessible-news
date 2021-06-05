@@ -3,7 +3,7 @@
     <nuxt-link :to="'/articles/' + route"  class="mr-4 header-link" v-if="title">
       <h2 style="margin-top: 0; margin-bottom: 0;">{{ title }}</h2>
     </nuxt-link>
-    <nav id="subNavigation">
+    <nav class="subNavigation">
       <ul class="flex" v-if="nav.story">
         <li v-for="nav_item in nav.story.content.navigation">
           <nuxt-link :to="'/articles/' + route + nav_item.link.url">{{ nav_item.name }}</nuxt-link>
